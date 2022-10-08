@@ -1,0 +1,46 @@
+@use "sass:map";
+@use "sass:meta";
+
+$size__site_content_width: 1024px;
+$size__mobile: 667px;
+$size__tablet: 668px;
+$size__big_desktop: 1801px;
+
+$media_queries: (
+  'mobile': unquote('only screen and (max-width: $size__mobile)'),
+  'tablet': unquote('only screen and (min-width: $size__tablet) and (max-width: $size__site_content_width)'
+  ),
+  'desktop': unquote('only screen and (min-width: ($size__site_content_width + 1))'),
+  'big-desktop': unquote('only screen and (min-width: $size__big_desktop)'),
+  'retina2': unquote('only screen and (-webkit-min-device-pixel-ratio: 2) and (min-resolution: 192dpi)'
+  ),
+  'retina3': unquote('only screen and (-webkit-min-device-pixel-ratio: 3) and (min-resolution: 288dpi)'
+  ),
+  'landscape': unquote('screen and (orientation:landscape)'),
+  'portrait': unquote('screen and (orientation:portrait)'),
+);
+
+@mixin for_breakpoint($breakpoints) {
+  $conditions: ();
+  @each $breakpoint in $breakpoints {
+    // If the key exists in the map
+    $conditions: append(
+      $conditions,
+      #{inspect(map-get($media_queries, $breakpoint))},
+      comma
+    );
+  }
+
+  @media #{$conditions} {
+    @content;
+  }
+}
+
+@mixin mobile { 
+  @include for_breakpoint(mobile) { 
+    @content; 
+  } 
+}
+@debug inspect(10px 20px 30px);
+@debug calc(12px / 4px);
+//@debug map.get($media_queries, $breakpoints);

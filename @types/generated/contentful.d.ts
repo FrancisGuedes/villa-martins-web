@@ -3,44 +3,35 @@
 import { Asset, Entry } from 'contentful';
 import { Document } from '@contentful/rich-text-types';
 
-export interface IContentFields {
+export interface IAboutFields {
   /** name */
   name: string;
 
-  /** single media */
-  singleMedia?: Asset | undefined;
-}
+  /** id */
+  id: string;
 
-/** section content */
-
-export interface IContent extends Entry<IContentFields> {
-  sys: {
-    id: string;
-    type: string;
-    createdAt: string;
-    updatedAt: string;
-    locale: string;
-    contentType: {
-      sys: {
-        id: 'content';
-        linkType: 'ContentType';
-        type: 'Link';
-      };
-    };
-  };
-}
-
-export interface IPageFields {
   /** title */
-  title: string;
+  title?: string | undefined;
 
-  /** slug */
-  slug: string;
+  /** text_content */
+  textContent?: Entry<{ [fieldId: string]: unknown }>[] | undefined;
+
+  /** utilities_title */
+  utilitiesTitle?: string | undefined;
+
+  /** utilities */
+  utilities: string[];
+
+  /** image_content */
+  imageContent?: Entry<{ [fieldId: string]: unknown }> | undefined;
+
+  /** about_button */
+  aboutButton?: Entry<{ [fieldId: string]: unknown }> | undefined;
 }
 
-/** Content related of a Single Page Application */
+/** About section */
 
-export interface IPage extends Entry<IPageFields> {
+export interface IAbout extends Entry<IAboutFields> {
   sys: {
     id: string;
     type: string;
@@ -49,7 +40,7 @@ export interface IPage extends Entry<IPageFields> {
     locale: string;
     contentType: {
       sys: {
-        id: 'page';
+        id: 'about';
         linkType: 'ContentType';
         type: 'Link';
       };
@@ -57,17 +48,20 @@ export interface IPage extends Entry<IPageFields> {
   };
 }
 
-export interface ISectionFields {
+export interface IButtonFields {
   /** name */
   name: string;
 
-  /** metadata */
-  metadata?: Entry<{ [fieldId: string]: unknown }>[] | undefined;
+  /** id */
+  id: string;
+
+  /** href */
+  href?: Entry<{ [fieldId: string]: unknown }> | undefined;
 }
 
-/** section wrapper */
+/** Button component */
 
-export interface ISection extends Entry<ISectionFields> {
+export interface IButton extends Entry<IButtonFields> {
   sys: {
     id: string;
     type: string;
@@ -76,7 +70,7 @@ export interface ISection extends Entry<ISectionFields> {
     locale: string;
     contentType: {
       sys: {
-        id: 'section';
+        id: 'button';
         linkType: 'ContentType';
         type: 'Link';
       };
@@ -84,20 +78,35 @@ export interface ISection extends Entry<ISectionFields> {
   };
 }
 
-export interface ISectionMetadataFields {
+export interface ICardFields {
   /** name */
   name: string;
 
-  /** section_id */
-  sectionId: string;
+  /** id */
+  id: string;
 
-  /** background_color */
-  backgroundColor: string;
+  /** reviewer */
+  reviewer: string;
+
+  /** stars */
+  stars: number;
+
+  /** review_month */
+  reviewMonth: string;
+
+  /** review_year */
+  reviewYear: number;
+
+  /** source */
+  source: string;
+
+  /** the_review */
+  theReview: Document;
 }
 
-/** Meta data for each section of page */
+/** Card component for reviews */
 
-export interface ISectionMetadata extends Entry<ISectionMetadataFields> {
+export interface ICard extends Entry<ICardFields> {
   sys: {
     id: string;
     type: string;
@@ -106,7 +115,7 @@ export interface ISectionMetadata extends Entry<ISectionMetadataFields> {
     locale: string;
     contentType: {
       sys: {
-        id: 'sectionMetadata';
+        id: 'card';
         linkType: 'ContentType';
         type: 'Link';
       };
@@ -114,7 +123,461 @@ export interface ISectionMetadata extends Entry<ISectionMetadataFields> {
   };
 }
 
-export type CONTENT_TYPE = 'content' | 'page' | 'section' | 'sectionMetadata';
+export interface ICarouselFields {
+  /** name */
+  name: string;
+
+  /** id */
+  id: string;
+
+  /** carousel_media */
+  carouselMedia?: Entry<{ [fieldId: string]: unknown }>[] | undefined;
+}
+
+/** Carousel component for several images */
+
+export interface ICarousel extends Entry<ICarouselFields> {
+  sys: {
+    id: string;
+    type: string;
+    createdAt: string;
+    updatedAt: string;
+    locale: string;
+    contentType: {
+      sys: {
+        id: 'carousel';
+        linkType: 'ContentType';
+        type: 'Link';
+      };
+    };
+  };
+}
+
+export interface IContactFields {
+  /** name */
+  name: string;
+
+  /** id */
+  id: string;
+
+  /** title */
+  title?: string | undefined;
+
+  /** social_media_links */
+  socialMediaLinks: Entry<{ [fieldId: string]: unknown }>[];
+}
+
+/** Contact section page */
+
+export interface IContact extends Entry<IContactFields> {
+  sys: {
+    id: string;
+    type: string;
+    createdAt: string;
+    updatedAt: string;
+    locale: string;
+    contentType: {
+      sys: {
+        id: 'contact';
+        linkType: 'ContentType';
+        type: 'Link';
+      };
+    };
+  };
+}
+
+export interface IFooterFields {
+  /** name */
+  name: string;
+
+  /** id */
+  id: string;
+
+  /** description */
+  description: string;
+
+  /** crafted_title */
+  craftedTitle: string;
+
+  /** crafted_person_name */
+  craftedPersonName: string;
+
+  /** crafted_person_container_link */
+  craftedPersonContainerLink: Entry<{ [fieldId: string]: unknown }>;
+}
+
+/** Footer component section */
+
+export interface IFooter extends Entry<IFooterFields> {
+  sys: {
+    id: string;
+    type: string;
+    createdAt: string;
+    updatedAt: string;
+    locale: string;
+    contentType: {
+      sys: {
+        id: 'footer';
+        linkType: 'ContentType';
+        type: 'Link';
+      };
+    };
+  };
+}
+
+export interface IHomeFields {
+  /** home */
+  home: string;
+
+  /** id */
+  id: string;
+
+  /** carousel_data */
+  carouselData?: Entry<{ [fieldId: string]: unknown }> | undefined;
+
+  /** button_data */
+  buttonData?: Entry<{ [fieldId: string]: unknown }> | undefined;
+}
+
+/** Home component section */
+
+export interface IHome extends Entry<IHomeFields> {
+  sys: {
+    id: string;
+    type: string;
+    createdAt: string;
+    updatedAt: string;
+    locale: string;
+    contentType: {
+      sys: {
+        id: 'home';
+        linkType: 'ContentType';
+        type: 'Link';
+      };
+    };
+  };
+}
+
+export interface IImageSectionFields {
+  /** name */
+  name: string;
+
+  /** id */
+  id: string;
+
+  /** title */
+  title?: string | undefined;
+
+  /** image_media */
+  imageMedia?: Entry<{ [fieldId: string]: unknown }>[] | undefined;
+}
+
+/** Component for an image section with a title */
+
+export interface IImageSection extends Entry<IImageSectionFields> {
+  sys: {
+    id: string;
+    type: string;
+    createdAt: string;
+    updatedAt: string;
+    locale: string;
+    contentType: {
+      sys: {
+        id: 'imageSection';
+        linkType: 'ContentType';
+        type: 'Link';
+      };
+    };
+  };
+}
+
+export interface ILinkFields {
+  /** name */
+  name: string;
+
+  /** id */
+  id: string;
+
+  /** rel */
+  rel: string;
+
+  /** href */
+  href?: string | undefined;
+}
+
+/** Link component for any reutilization needed */
+
+export interface ILink extends Entry<ILinkFields> {
+  sys: {
+    id: string;
+    type: string;
+    createdAt: string;
+    updatedAt: string;
+    locale: string;
+    contentType: {
+      sys: {
+        id: 'link';
+        linkType: 'ContentType';
+        type: 'Link';
+      };
+    };
+  };
+}
+
+export interface IMultiImageFields {
+  /** name */
+  name: string;
+
+  /** id */
+  id: string;
+
+  /** href */
+  href?: string | undefined;
+
+  /** alt */
+  alt?: string | undefined;
+
+  /** media */
+  media?: Asset[] | undefined;
+}
+
+/** Multi image component for carousels or grids */
+
+export interface IMultiImage extends Entry<IMultiImageFields> {
+  sys: {
+    id: string;
+    type: string;
+    createdAt: string;
+    updatedAt: string;
+    locale: string;
+    contentType: {
+      sys: {
+        id: 'multiImage';
+        linkType: 'ContentType';
+        type: 'Link';
+      };
+    };
+  };
+}
+
+export interface INavbarFields {
+  /** name */
+  name: string;
+
+  /** id */
+  id: string;
+
+  /** navlinks */
+  navlinks: Entry<{ [fieldId: string]: unknown }>[];
+
+  /** logo_image */
+  logoImage?: Entry<{ [fieldId: string]: unknown }> | undefined;
+}
+
+/** Navbar component */
+
+export interface INavbar extends Entry<INavbarFields> {
+  sys: {
+    id: string;
+    type: string;
+    createdAt: string;
+    updatedAt: string;
+    locale: string;
+    contentType: {
+      sys: {
+        id: 'navbar';
+        linkType: 'ContentType';
+        type: 'Link';
+      };
+    };
+  };
+}
+
+export interface IParagraphFields {
+  /** name */
+  name: string;
+
+  /** id */
+  id: string;
+
+  /** paragraph-content */
+  paragraphContent: Document;
+}
+
+/** Paragraph component */
+
+export interface IParagraph extends Entry<IParagraphFields> {
+  sys: {
+    id: string;
+    type: string;
+    createdAt: string;
+    updatedAt: string;
+    locale: string;
+    contentType: {
+      sys: {
+        id: 'paragraph';
+        linkType: 'ContentType';
+        type: 'Link';
+      };
+    };
+  };
+}
+
+export interface IReviewFields {
+  /** name */
+  name: string;
+
+  /** id */
+  id: string;
+
+  /** title */
+  title?: string | undefined;
+
+  /** card_reviews */
+  cardReviews: Entry<{ [fieldId: string]: unknown }>[];
+}
+
+/** Review Section */
+
+export interface IReview extends Entry<IReviewFields> {
+  sys: {
+    id: string;
+    type: string;
+    createdAt: string;
+    updatedAt: string;
+    locale: string;
+    contentType: {
+      sys: {
+        id: 'review';
+        linkType: 'ContentType';
+        type: 'Link';
+      };
+    };
+  };
+}
+
+export interface ISingleImageFields {
+  /** name */
+  name: string;
+
+  /** id */
+  id: string;
+
+  /** href */
+  href?: string | undefined;
+
+  /** media */
+  media: Asset;
+
+  /** alt */
+  alt?: string | undefined;
+}
+
+/** Single image component */
+
+export interface ISingleImage extends Entry<ISingleImageFields> {
+  sys: {
+    id: string;
+    type: string;
+    createdAt: string;
+    updatedAt: string;
+    locale: string;
+    contentType: {
+      sys: {
+        id: 'singleImage';
+        linkType: 'ContentType';
+        type: 'Link';
+      };
+    };
+  };
+}
+
+export interface IStayWithUsFields {
+  /** name */
+  name: string;
+
+  /** id */
+  id: string;
+
+  /** stay_with_us-text_content */
+  stayWithUsTextContent?: Entry<{ [fieldId: string]: unknown }> | undefined;
+
+  /** stay_with_us-image_content */
+  stayWithUsImageContent?: Entry<{ [fieldId: string]: unknown }> | undefined;
+}
+
+/** Stay with us component section */
+
+export interface IStayWithUs extends Entry<IStayWithUsFields> {
+  sys: {
+    id: string;
+    type: string;
+    createdAt: string;
+    updatedAt: string;
+    locale: string;
+    contentType: {
+      sys: {
+        id: 'stayWithUs';
+        linkType: 'ContentType';
+        type: 'Link';
+      };
+    };
+  };
+}
+
+export interface ITextDescriptionFields {
+  /** name */
+  name: string;
+
+  /** id */
+  id: string;
+
+  /** title */
+  title?: string | undefined;
+
+  /** sub-title */
+  subTitle?: string | undefined;
+
+  /** paragraphs */
+  paragraphs?: Entry<{ [fieldId: string]: unknown }>[] | undefined;
+}
+
+/** A component for text */
+
+export interface ITextDescription extends Entry<ITextDescriptionFields> {
+  sys: {
+    id: string;
+    type: string;
+    createdAt: string;
+    updatedAt: string;
+    locale: string;
+    contentType: {
+      sys: {
+        id: 'textDescription';
+        linkType: 'ContentType';
+        type: 'Link';
+      };
+    };
+  };
+}
+
+export type CONTENT_TYPE =
+  | 'about'
+  | 'button'
+  | 'card'
+  | 'carousel'
+  | 'contact'
+  | 'footer'
+  | 'home'
+  | 'imageSection'
+  | 'link'
+  | 'multiImage'
+  | 'navbar'
+  | 'paragraph'
+  | 'review'
+  | 'singleImage'
+  | 'stayWithUs'
+  | 'textDescription';
 
 export type LOCALE_CODE = 'en-US';
 

@@ -1,0 +1,49 @@
+@use 'colors';
+@use 'mediaQueries';
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;900&family=Silkscreen:wght@400;700&display=swap');
+
+$font-weights: ("regular": 400, "medium": 500, "bold": 700);
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  padding: 0;
+  margin: 0;
+  font-family: 'Montserrat', sans-serif;
+}
+
+body {
+  background-color: colors.$mainBackground;
+}
+
+main {
+  padding: 18vh 5vw 5vh 4.5vw;
+  @include mediaQueries.for_breakpoint("big-desktop") {
+    padding: 14vw 15% 5vh 15%;
+  }
+
+  @include mediaQueries.for_breakpoint("tablet") {
+    padding: 16vh 5vw 5vh 6.5vw;
+  }
+
+  @include mediaQueries.mobile {
+    padding: 16vh 5vw 5vh 6.5vw;
+  }
+
+  /* @media (min-width: 668px) {
+    padding: 14vw 15% 5vh 15%;
+  } */
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+ul {
+  text-decoration: none;
+  list-style: none;
+}

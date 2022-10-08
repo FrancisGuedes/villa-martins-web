@@ -1,7 +1,4 @@
-import type { GetStaticProps } from 'next'
-import { ContentfulClientApi, createClient, EntryCollection } from 'contentful'
-
-import { ISectionFields } from '../../../@types/generated/contentful'
+import { createClient } from 'contentful'
 
 /* export const getStaticProps: GetStaticProps = async () => {
 

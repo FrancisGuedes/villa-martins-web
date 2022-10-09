@@ -1,6 +1,7 @@
 @use "sass:map";
 
 // Breakpoints
+$size__default: 1220px;
 $size__site_content_width: 1024px;
 $size__mobile: 667px;
 $size__tablet: 668px;
@@ -14,6 +15,7 @@ $size__big_desktop: 1801px;
     "screen": "only screen",
     "print": "only print",
     "retina": "(-webkit-min-device-pixel-ratio: 1.5), (min--moz-device-pixel-ratio: 1.5), (-o-min-device-pixel-ratio: 3/2), (min-device-pixel-ratio: 1.5), (min-resolution: 120dpi)",
+    "<defaultSize": "(max-width: #{$size__default})",
     ">smallDesktopSize": "(min-width: #{$size__site_content_width + 1})",
     "<smallDesktopSize": "(max-width: #{$size__site_content_width})", 		
     ">tabletSize": "(min-width: #{$size__tablet})",
@@ -51,6 +53,12 @@ $size__big_desktop: 1801px;
 
 @mixin tablet { 
   @include media("screen", ">tabletSize", "<smallDesktopSize") { 
+    @content; 
+  } 
+}
+
+@mixin smallDesktops { 
+  @include media("screen", ">smallDesktopSize", "<defaultSize") { 
     @content; 
   } 
 }

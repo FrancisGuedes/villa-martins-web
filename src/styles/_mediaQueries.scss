@@ -1,46 +1,62 @@
 @use "sass:map";
-@use "sass:meta";
 
+// Breakpoints
 $size__site_content_width: 1024px;
 $size__mobile: 667px;
 $size__tablet: 668px;
 $size__big_desktop: 1801px;
 
-$media_queries: (
-  'mobile': unquote('only screen and (max-width: $size__mobile)'),
-  'tablet': unquote('only screen and (min-width: $size__tablet) and (max-width: $size__site_content_width)'
-  ),
-  'desktop': unquote('only screen and (min-width: ($size__site_content_width + 1))'),
-  'big-desktop': unquote('only screen and (min-width: $size__big_desktop)'),
-  'retina2': unquote('only screen and (-webkit-min-device-pixel-ratio: 2) and (min-resolution: 192dpi)'
-  ),
-  'retina3': unquote('only screen and (-webkit-min-device-pixel-ratio: 3) and (min-resolution: 288dpi)'
-  ),
-  'landscape': unquote('screen and (orientation:landscape)'),
-  'portrait': unquote('screen and (orientation:portrait)'),
-);
-
-@mixin for_breakpoint($breakpoints) {
-  $conditions: ();
-  @each $breakpoint in $breakpoints {
-    // If the key exists in the map
-    $conditions: append(
-      $conditions,
-      #{inspect(map-get($media_queries, $breakpoint))},
-      comma
-    );
-  }
-
-  @media #{$conditions} {
-    @content;
-  }
+// the map function for specific breakpoints
+@function translate-media-condition($condition) {
+  $conditionMap: (
+    "landscape": "(orientation:landscape)",
+    "portrait": "(orientation:portrait)",
+    "screen": "only screen",
+    "print": "only print",
+    "retina": "(-webkit-min-device-pixel-ratio: 1.5), (min--moz-device-pixel-ratio: 1.5), (-o-min-device-pixel-ratio: 3/2), (min-device-pixel-ratio: 1.5), (min-resolution: 120dpi)",
+    ">smallDesktopSize": "(min-width: #{$size__site_content_width + 1})",
+    "<smallDesktopSize": "(max-width: #{$size__site_content_width})", 		
+    ">tabletSize": "(min-width: #{$size__tablet})",
+    "<tabletSize": "(max-width: #{$size__tablet})",
+    ">mobileSize": "(min-width: #{$size__mobile + 1})",
+    "<mobileSize": "(max-width: #{$size__mobile})",
+    ">bigDesktopSize": "(min-width: #{$size__big_desktop + 1})",
+    "<bigDesktopSize": "(max-width: #{$size__big_desktop})",
+  );
+  @return map-get( $conditionMap, $condition);
 }
 
-@mixin mobile { 
-  @include for_breakpoint(mobile) { 
+// The media mixin
+@mixin media($args...) {
+  $query: "";
+  @each $arg in $args {
+    $op: "";
+    @if ( $query != "" ) {
+      $op: " and ";
+    }
+    /* Combining breakpoints dependencies */
+    $query: $query + $op + translate-media-condition($arg);
+  }
+
+  /* Building final media query */
+  @media #{$query}  { @content; }
+}
+
+// Usefull custom media mixins
+@mixin maxWidthMobile { 
+  @include media("screen", "<mobileSize") { 
     @content; 
   } 
 }
-@debug inspect(10px 20px 30px);
-@debug calc(12px / 4px);
-//@debug map.get($media_queries, $breakpoints);
+
+@mixin tablet { 
+  @include media("screen", ">tabletSize", "<smallDesktopSize") { 
+    @content; 
+  } 
+}
+
+@mixin minWidthBigDesktops { 
+  @include media("screen", ">bigDesktopSize") { 
+    @content; 
+  } 
+}

@@ -8,7 +8,8 @@
     "start": "next start",
     "lint": "next lint",
     "test": "jest",
-    "codegen": "contentful-typescript-codegen --output @types/generated/contentful.d.ts"
+    "codegen": "contentful-typescript-codegen --output @types/generated/contentful.d.ts",
+    "sass": "sass --watch scss -o css"
   },
   "dependencies": {
     "contentful": "^9.2.5",

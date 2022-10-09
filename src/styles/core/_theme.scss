@@ -1,8 +1,6 @@
 @use 'colors';
 @use 'mediaQueries';
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;900&family=Silkscreen:wght@400;700&display=swap');
-
-$font-weights: ("regular": 400, "medium": 500, "bold": 700);
+@use 'fonts';
 
 * {
   box-sizing: border-box;
@@ -13,6 +11,7 @@ body {
   padding: 0;
   margin: 0;
   font-family: 'Montserrat', sans-serif;
+  font-weight: fonts.$font-medium;
 }
 
 body {

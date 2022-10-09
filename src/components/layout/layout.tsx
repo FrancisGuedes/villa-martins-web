@@ -1,5 +1,3 @@
-import './layout.module.scss';
-
 type LayoutProps = {
   children: React.ReactNode;
 };

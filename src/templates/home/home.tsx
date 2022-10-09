@@ -3,27 +3,27 @@ import { useEffect, useState } from 'react';
 
 import { IHomeFields } from '../../../@types/generated/contentful';
 
-import './Hero.module.scss';
+import './home.module.scss';
 
-interface IHeroProps {
-  heroSection: IHomeFields[];
+interface IhomeProps {
+  homeSectionProps: IHomeFields[];
 }
 
-const Hero: NextPage<IHeroProps>  = ({ heroSection }: IHeroProps) => {
-  console.log("HERO heroSection: ", heroSection)
+const Home: NextPage<IhomeProps>  = ({ homeSectionProps }: IhomeProps) => {
+  console.log("home homeSection: ", homeSectionProps)
   const [data, setData] = useState<Array<IHomeFields>>([]);
 
   useEffect(() => {
-    setData(heroSection);
+    setData(homeSectionProps);
   }, []);
 
   return (
     <>
       <section>
-        Hero Component
+        home Component
       </section>
     </>
   );
 }
 
-export default Hero;
+export default Home;

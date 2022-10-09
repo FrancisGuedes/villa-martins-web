@@ -2,29 +2,25 @@ import type { NextPage, GetStaticProps, GetStaticPaths, GetServerSideProps } fro
 import { ContentfulClientApi, createClient, EntryCollection } from 'contentful'
 import { useEffect, useState } from 'react'
 
-import Head from 'next/head'
-import Image from 'next/image'
 import ContentService from '../utils/contentful/content-service'
 import { MainContentTypeId } from '../utils/contentful/content-type-id'
-import Hero from '../templates/hero/hero'
-import { IHomeFields } from '../../@types/generated/contentful'
+import { IHomeFields, INavbarFields } from '../../@types/generated/contentful'
 import Layout from '../components/layout/layout'
+import Navbar from '../components/navbar/navbar'
+import Home from '../templates/home/home'
 
 interface IIndexProps {
-  heroSection: IHomeFields[];
+  navbarSectionProps: INavbarFields[];
+  homeSectionProps: IHomeFields[];
 }
 
-const Index: NextPage<IIndexProps> = ({heroSection}: IIndexProps) => {
-  console.log("INDEX heroProps",heroSection)
-/*   const [data, setData] = useState<Array<ISectionFields>>([]);
-
-  useEffect(() => {
-    setData(reviewsSection);
-  }, []);
-
-  console.log("reviews:", reviewsSection)
-  console.log("data:", data)
-
+const Index: NextPage<IIndexProps> = ({
+  navbarSectionProps, 
+  homeSectionProps
+}: IIndexProps) => {
+  console.log("INDEX navbarProps",navbarSectionProps)
+  console.log("INDEX homeProps",homeSectionProps)
+/* 
   const p = data?.map((el) => {
     return el.metadata?.map(i => 
       {
@@ -44,7 +40,8 @@ const Index: NextPage<IIndexProps> = ({heroSection}: IIndexProps) => {
         {p}
       </span> */}
       <Layout>
-        <Hero heroSection={heroSection} />
+        <Navbar />
+        <Home homeSectionProps={homeSectionProps} />
       </Layout>
     </>
   )
@@ -53,13 +50,18 @@ const Index: NextPage<IIndexProps> = ({heroSection}: IIndexProps) => {
 export default Index;
 
 export const getStaticProps: GetStaticProps = async () => {
-  const heroSection = (
+  const navbarSectionProps = (
+    await ContentService.instance.getEntriesByType<INavbarFields>(MainContentTypeId.NAVBAR)
+  ).map((entry) => entry.fields);
+
+  const homeSectionProps = (
     await ContentService.instance.getEntriesByType<IHomeFields>(MainContentTypeId.HOME)
   ).map((entry) => entry.fields);
 
   return {
     props: {
-      heroSection,
+      navbarSectionProps,
+      homeSectionProps,
     },
   };
 };

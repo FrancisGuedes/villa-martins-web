@@ -5,16 +5,16 @@ import { IHomeFields } from '../../../@types/generated/contentful';
 
 import './home.module.scss';
 
-interface IhomeProps {
+interface IHomeProps {
   homeSectionProps: IHomeFields[];
 }
 
-const Home: NextPage<IhomeProps>  = ({ homeSectionProps }: IhomeProps) => {
-  console.log("home homeSection: ", homeSectionProps)
-  const [data, setData] = useState<Array<IHomeFields>>([]);
+const Home: NextPage<IHomeProps>  = ({ homeSectionProps }: IHomeProps) => {
+  //console.log("home homeSection: ", homeSectionProps)
+  const [contentfulHomeData, setContentfulHomeData] = useState<Array<IHomeFields>>([]);
 
   useEffect(() => {
-    setData(homeSectionProps);
+    setContentfulHomeData(homeSectionProps);
   }, []);
 
   return (

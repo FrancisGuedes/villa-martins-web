@@ -20,7 +20,7 @@ body {
 
 main {
   padding: 18vh 5vw 5vh 4.5vw;
-
+  min-height: 100vh;
   @include mediaQueries.minWidthBigDesktops {
     padding: 14vw 15% 5vh 15%;
   }

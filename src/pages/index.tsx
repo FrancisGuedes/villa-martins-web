@@ -20,28 +20,12 @@ const Index: NextPage<IIndexProps> = ({
 }: IIndexProps) => {
   console.log("INDEX navbarProps",navbarSectionProps)
   console.log("INDEX homeProps",homeSectionProps)
-/* 
-  const p = data?.map((el) => {
-    return el.metadata?.map(i => 
-      {
-        return(
-          <p>{i.sys.id}</p>
-        )
-      }
-    )
-  })
- */
+
   return (
     <>
-      {/* <p>
-        item name: {data.map(item => item.name)}
-      </p>
-      <span>
-        {p}
-      </span> */}
+      <Navbar navbarSectionProps={navbarSectionProps}/>
       <Layout>
-        <Navbar />
-        <Home homeSectionProps={homeSectionProps} />
+        <Home homeSectionProps={homeSectionProps}/>
       </Layout>
     </>
   )

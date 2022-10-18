@@ -303,6 +303,9 @@ export interface ILinkFields {
 
   /** href */
   href?: string | undefined;
+
+  /** title */
+  title?: string | undefined;
 }
 
 /** Link component for any reutilization needed */

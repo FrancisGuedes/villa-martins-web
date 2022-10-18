@@ -35,6 +35,7 @@ export default class ContentService {
     return (
       await this.client.getEntries<T>({
         content_type: type,
+        include: 10 
       })
     ).items;
   }

@@ -15,7 +15,8 @@ interface LogoProps {
   logoImageProps: LogoModule.ILogoData;
   width: number,
   height: number,
-  className?: string | undefined
+  className?: string | undefined,
+  children?: React.ReactNode 
 }
 
 type LabelLogo = {
@@ -23,6 +24,7 @@ type LabelLogo = {
 }
 
 const Logo: NextPage<LogoProps> = ({
+    children,
     logoImageProps,
     width,
     height,

@@ -22,10 +22,10 @@ const Navbar: NextPage<INavbarProps> = (
   const [isNavbarActive, setIsNavbarActive] = useState<boolean>(false);
   const [lastScrollY, setLastScrollY] = useState<number>(0);
   const [mobileNavOpen, setMobileNavOpen] = useState<boolean>(false);
-  const [windowSize, setWindowSize] = useState<IWindowSize>(getWindowSize());
+  const [windowSize, setWindowSize] = useState<IWindowSize | undefined>(getWindowSize());
   
   const windowWidthTablet: number = +tabletSizeWindow.tabletSizeWindow.slice(0, 3);
-  const windowWidth: number = windowSize.innerWidth;
+  const windowWidth: number | undefined = windowSize?.innerWidth;
 
   const logoData: LogoModule.ILogoData = new Map(Object.entries(navbarSectionProps))
   .values()
@@ -52,17 +52,6 @@ const Navbar: NextPage<INavbarProps> = (
     handleDomNavbarActivity();
   }, [contentfulNavbarData, lastScrollY, mobileNavOpen]);
 
-  /* const checkHomeUrl = (currentUrlLink: string): boolean | undefined => {
-    console.log("currentUrlLink: ", currentUrlLink)
-    if(currentUrlLink === urlHome) {
-      setIsHomeUrl(true);
-      console.log("isHomeUrl", isHomeUrl)
-    } else {
-      setIsHomeUrl(false)
-      console.log("isHomeUrl", isHomeUrl)
-    }
-    return isHomeUrl;
-  }; */
 
   const renderNavlinks: JSX.Element[] = navlinksData.map((navlinkInfo) => {
     return (
@@ -73,7 +62,7 @@ const Navbar: NextPage<INavbarProps> = (
             href={`#${navlinkInfo.fields.href}`}
           >
               <a onClick={() => {
-                  windowWidth <= windowWidthTablet ? menuToggle() : ''
+                  windowWidth! <= windowWidthTablet ? menuToggle() : ''
                 }}>
                   {navlinkInfo.fields.title}
               </a>
@@ -108,11 +97,13 @@ const Navbar: NextPage<INavbarProps> = (
     setWindowSize(getWindowSize());
   }
 
-  function handleDomWindowResize(): () => void {
-    window.addEventListener('resize', handleWindowResize);
-    return () => {
-      window.removeEventListener('resize', handleWindowResize);
-    };
+  function handleDomWindowResize(): (() => void) | undefined {
+    if (typeof window !== "undefined") {
+      window.addEventListener('resize', handleWindowResize);
+      return () => {
+        window.removeEventListener('resize', handleWindowResize);
+      };
+    }
   }
 
   function handleDomNavbarActivity(): (() => void) | undefined {
@@ -127,7 +118,9 @@ const Navbar: NextPage<INavbarProps> = (
 
   return (
     <header className={`header-navbar-active ${isNavbarActive ? 'hidden' : ''}`}>
-      <Logo logoImageProps={logoData} />
+      <Logo 
+        logoImageProps={logoData}
+      />
 
       {/* BEGIN MOBILE MENU */}
       <span className="toggle-menu-wrapper">

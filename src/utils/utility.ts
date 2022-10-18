@@ -28,3 +28,14 @@ export function concatHttpsAndUrlFromContentful(httpsContentful: string): string
   return HTTPS.concat(httpsContentful);
 }
 
+export interface IWindowSize {
+  innerWidth: number, 
+  innerHeight: number
+}
+
+export function getWindowSize(): IWindowSize | undefined {
+  if (typeof window !== "undefined") {
+    const {innerWidth, innerHeight} = window;
+    return {innerWidth, innerHeight};
+  }
+}

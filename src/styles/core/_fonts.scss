@@ -1,9 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;900&family=Silkscreen:wght@400;700&display=swap');
 
-$font-weights: ("light": 300, "regular": 400, "medium": 500, "bold": 700, "extra-bold": 900);
+$font-weights: ("light": 300, "regular": 400, "medium": 500, "semi-bold": 600, "bold": 700, "extra-bold": 900);
 
 $font-light: map-get($map: $font-weights, $key: light);
 $font-regular: map-get($map: $font-weights, $key: regular);
 $font-medium: map-get($map: $font-weights, $key: medium);
+$font-semi-bold: map-get($map: $font-weights, $key: semi-bold);
 $font-bold: map-get($map: $font-weights, $key: bold);
 $font-extra-bold: map-get($map: $font-weights, $key: extra-bold);

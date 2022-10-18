@@ -2,7 +2,7 @@
 
 // Breakpoints
 $size__default: 1220px;
-$size__site_content_width: 1024px;
+$size__site_content_width: 970px;
 $size__mobile: 667px;
 $size__tablet: 668px;
 $size__big_desktop: 1801px;
@@ -57,8 +57,20 @@ $size__big_desktop: 1801px;
   } 
 }
 
+@mixin maxWidthtablet { 
+  @include media("screen", "<tabletSize") { 
+    @content; 
+  } 
+}
+
 @mixin smallDesktops { 
   @include media("screen", ">smallDesktopSize", "<defaultSize") { 
+    @content; 
+  } 
+}
+
+@mixin desktop { 
+  @include media("screen", ">smallDesktopSize") { 
     @content; 
   } 
 }

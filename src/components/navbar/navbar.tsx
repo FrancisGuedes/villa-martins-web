@@ -119,7 +119,10 @@ const Navbar: NextPage<INavbarProps> = (
   return (
     <header className={`header-navbar-active ${isNavbarActive ? 'hidden' : ''}`}>
       <Logo 
-        logoImageProps={logoData}
+        logoImageProps={logoData} 
+        width={150} 
+        height={150} 
+        className='navbar-logo'
       />
 
       {/* BEGIN MOBILE MENU */}

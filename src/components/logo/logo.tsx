@@ -3,45 +3,39 @@ import Image from 'next/image'
 import Link from 'next/link';
 
 import { useState, useEffect } from 'react';
-import { urlHome } from '../../lib/endpoints';
 
+import { urlHome } from '../../lib/endpoints';
 import { LogoModule } from '../../lib/interfaces/contentful';
-import { checkUrlContentfulData, concatHttpsAndUrlFromContentful, errorHandler } from '../../utils/utility';
+import { functionalityAlias } from '../../utils/strings';
+import { checkUrlContentfulData, concatHttpsAndUrlFromContentful, createClassName } from '../../utils/utility';
 
 import './logo.module.scss';
 
 interface LogoProps {
   logoImageProps: LogoModule.ILogoData;
+  width: number,
+  height: number,
+  className?: string | undefined
 }
 
-const Logo: NextPage<LogoProps> = ({logoImageProps}: LogoProps) => {
+type LabelLogo = {
+  defaultClassName: string;
+}
+
+const Logo: NextPage<LogoProps> = ({
+    logoImageProps,
+    width,
+    height,
+    className
+  }: LogoProps) => {
   const [logoImageData, setLogoImageData] = useState<LogoModule.ILogoData>();
+  
+  const labelLogo: LabelLogo = {...functionalityAlias.component.logo};
+  const classes: string = createClassName(labelLogo.defaultClassName, className);
 
   useEffect(() => {
       setLogoImageData(logoImageProps)
   }, []);
-
-  /* function validateLogoImageProps(dataFields: LogoModule.ILogoData): LogoModule.ILogoData | null {
-    try {
-      const dataFieldsn = dataFields.media
-      if(dataFields != null || dataFields != undefined) {
-        if(dataFields?.length === 0) {
-          return null;
-        } else if(dataFields.length > 0 ) {
-          return new Map(Object.entries(dataFields))
-          ?.values()
-          .next()
-          .value['fields'];
-        }
-      } else {
-        console.error(`LOGO_IMAGE error while getting logoImageProps: ${dataFields}`);
-        throw new Error('NOT FOUND logoImageProps: ', dataFields);
-      }
-    } catch (error) {
-      console.error('LOGO_IMAGE error exception: ', error);
-    }
-    return null;
-  } */
   
   const checkMediaFields = (
     mediaField: LogoModule.IFields | undefined | null
@@ -58,8 +52,6 @@ const Logo: NextPage<LogoProps> = ({logoImageProps}: LogoProps) => {
   const mediaFields: LogoModule.IFields = checkMediaFields(logoImageData?.media.fields)
   const imageUrl: string = concatHttpsAndUrlFromContentful(mediaFields.file.url);
 
-  //console.log("mediaFields: ", mediaFields);
-
   return (
     <>
       <Link
@@ -71,9 +63,9 @@ const Logo: NextPage<LogoProps> = ({logoImageProps}: LogoProps) => {
         <Image
           src={imageUrl}
           alt={mediaFields.description}
-          className='logo-image'
-          width={30}
-          height={30}
+          className={classes}
+          width={width}
+          height={height}
         />
     </Link>
     </>

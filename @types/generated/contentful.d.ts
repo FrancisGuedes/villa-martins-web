@@ -57,6 +57,9 @@ export interface IButtonFields {
 
   /** href */
   href?: Entry<{ [fieldId: string]: unknown }> | undefined;
+
+  /** aria-label */
+  ariaLabel: string;
 }
 
 /** Button component */

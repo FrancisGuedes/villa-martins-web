@@ -1,0 +1,19 @@
+@use '../../styles/core/colors';
+@use '../../styles/core/fonts';
+
+.app-button {
+  width: 150px;
+  height: 30px;
+  font-size: 12px;
+  border-radius: 7px;
+  padding-left: 15px;
+  padding-right: 15px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  border-color: transparent;
+  background-color: colors.$black;
+  color: colors.$white;
+  &:focus {
+    outline-style: none;
+  }
+}

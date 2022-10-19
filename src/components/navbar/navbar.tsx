@@ -5,7 +5,8 @@ import Link from 'next/link'
 import { INavbarFields } from '../../../@types/generated/contentful';
 
 import Logo from '../logo/logo';
-import { LogoModule, NavbarModule } from '../../lib/interfaces/contentful';
+import { NavbarModule } from '../../lib/interfaces/contentful/inavbar';
+import { LogoModule } from '../../lib/interfaces/contentful/ilogo';
 import { getWindowSize, IWindowSize } from '../../utils/utility';
 
 import './navbar.module.scss';
@@ -16,8 +17,9 @@ interface INavbarProps {
   navbarSectionProps: INavbarFields[];
 }
 
-const Navbar: NextPage<INavbarProps> = (
-  { navbarSectionProps }: INavbarProps) => {
+const Navbar: NextPage<INavbarProps> = ({ 
+  navbarSectionProps 
+}: INavbarProps) => {
   const [contentfulNavbarData, setContentfulNavbarData] = useState<NavbarModule.INavbar>();
   const [isNavbarActive, setIsNavbarActive] = useState<boolean>(false);
   const [lastScrollY, setLastScrollY] = useState<number>(0);

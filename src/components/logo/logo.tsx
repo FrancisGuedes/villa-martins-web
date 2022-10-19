@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { useState, useEffect } from 'react';
 
 import { urlHome } from '../../lib/endpoints';
-import { LogoModule } from '../../lib/interfaces/contentful';
+import { LogoModule } from '../../lib/interfaces/contentful/ilogo';
 import { functionalityAlias } from '../../utils/strings';
 import { checkUrlContentfulData, concatHttpsAndUrlFromContentful, createClassName } from '../../utils/utility';
 

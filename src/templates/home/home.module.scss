@@ -1,0 +1,19 @@
+@use '../../styles/core/mediaQueries';
+
+.home-wrapper {
+  min-height: calc(100vh - 18vh);
+  @include mediaQueries.minWidthBigDesktops {
+    min-height: calc(100vh - 14vw);
+  }
+  @include mediaQueries.tablet {
+    min-height: calc(100vh - 16vh);
+  };
+  .stay-with-us-button {
+    margin: 30px auto;
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+  }
+}
+

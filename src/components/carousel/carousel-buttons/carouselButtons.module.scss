@@ -1,0 +1,68 @@
+@use '../../../styles/core/colors';
+@use '../../../styles/core/mediaQueries';
+
+.embla__button {
+  outline: 0;
+  cursor: pointer;
+  background-color: transparent;
+  touch-action: manipulation;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  border: 0;
+  width: 20px;
+  height: 20px;
+  justify-content: center;
+  align-items: center;
+  fill: colors.$carouselArrow;
+  padding: 0;
+  &:disabled {
+    cursor: default;
+    opacity: 0.3;
+  }
+  @include mediaQueries.maxWidthMobile {
+    display: none;
+  };
+}
+
+.embla__button__svg {
+  width: 100%;
+  height: 100%;
+}
+
+.embla__button--prev {
+  left: 27px;
+}
+
+.embla__button--next {
+  right: 27px;
+}
+
+.embla__dot {
+  background-color: transparent;
+  cursor: pointer;
+  position: relative;
+  padding: 0;
+  outline: 0;
+  border: 0;
+  width: 10px;
+  height: 30px;
+  margin-right: 3.5px;
+  margin-left: 3.5px;
+  display: flex;
+  align-items: center;
+  &:after {
+    background-color: colors.$dotNotSelected;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    content: '';
+  }
+  &.is-selected:after {
+    background-color: colors.$dotSelected;
+    opacity: 1;
+    width: 7px;
+    height: 7px;
+  }
+}
+

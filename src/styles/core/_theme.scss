@@ -23,14 +23,17 @@ body {
 }
 
 main {
-  padding: 18vh 5vw 5vh 4.5vw;
+  padding: 80px 5vw 5vh 4.5vw;
   min-height: 100vh;
   @include mediaQueries.minWidthBigDesktops {
-    padding: 14vw 15% 5vh 15%;
+    padding: 80px 15% 5vh 15%;
   }
   @include mediaQueries.tablet {
-    padding: 16vh 5vw 5vh 6.5vw;
+    padding: 80px 5vw 5vh 6.5vw;
   };
+  @include mediaQueries.maxWidthMobile {
+    padding: 80px 5vw 5vh 4.5vw;
+  }
 }
 
 a {

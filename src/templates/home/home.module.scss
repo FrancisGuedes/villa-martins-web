@@ -8,12 +8,18 @@
   @include mediaQueries.tablet {
     min-height: calc(100vh - 16vh);
   };
+  .carousel-wrapper {
+    position: relative;
+  }
   .stay-with-us-button {
     margin: 30px auto;
     display: flex;
     align-content: center;
     justify-content: center;
     align-items: center;
+    a {
+      padding-top: 3.5px;
+    }
   }
 }
 

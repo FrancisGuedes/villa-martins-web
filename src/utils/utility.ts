@@ -1,3 +1,4 @@
+import { LabelClassName } from "../components/carousel/carousel";
 import { HTTPS } from "../lib/endpoints";
 
 export function createClassName(defaultClass: string, classes?: string): string {
@@ -38,4 +39,18 @@ export function getWindowSize(): IWindowSize | undefined {
     const {innerWidth, innerHeight} = window;
     return {innerWidth, innerHeight};
   }
+}
+
+export function combineObjects(
+  defaultClass: LabelClassName, 
+  classes: LabelClassName | undefined
+  ): LabelClassName {
+    if(classes) {
+      let merged = Object.entries(defaultClass).reduce((acc, [key, value]) => 
+      // if key is already in defaultClass, add the values, otherwise, create new pair
+      ({ ...acc, [key]: (acc[key] || 0) + ' ' + value }), { ...classes });
+      return merged;
+    } else {
+      return defaultClass;
+    }
 }

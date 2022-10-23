@@ -18,9 +18,13 @@
   width: 100%;
   background-color: colors.$mainBackground;
   transition: all 1.5s ease-in-out;
+  z-index: 1;
   -webkit-transition: 0.29s cubic-bezier(0.52, 0.01, 0.16, 1);
   -moz-transition: 0.29s cubic-bezier(0.52, 0.01, 0.16, 1);
   transition: 0.29s cubic-bezier(0.52, 0.01, 0.16, 1);
+  @include mediaQueries.minWidthBigDesktops {
+    padding: 0 15% 0 15%;
+  };
   .navlink-wrapper {
     width: 500px;
     transition: top 1.5s ease-in-out;

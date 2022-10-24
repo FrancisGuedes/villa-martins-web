@@ -13,6 +13,7 @@
   .embla_viewport {
     overflow: hidden;
     width: 100%;
+    border-radius: 12px;
     &.is-draggable {
       cursor: move;
       cursor: grab;

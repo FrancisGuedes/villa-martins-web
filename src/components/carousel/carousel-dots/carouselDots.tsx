@@ -12,10 +12,6 @@ interface CarouselDotsProps {
   scrollTo?: (index: number) => void | undefined;
 }
 
-type LabelCarouselDots = {
-  defaultClassName: string;
-}
-
 const CarouselDots = ({
   scrollSnaps,
   active,
@@ -23,13 +19,11 @@ const CarouselDots = ({
   selectedIndex,
   scrollTo
 }: CarouselDotsProps) => {
-  const labelCarouselDots: LabelCarouselDots = {...functionalityAlias.component.carousel.carouselDots};
-  let classes: string = createClassName(labelCarouselDots.defaultClassName, className);
   
   return (
     <>
       { active ? (
-        <div className={classes}>
+        <div className={className}>
           {scrollSnaps.map((_: number, index: number) => (
             <DotButton
               key={index}

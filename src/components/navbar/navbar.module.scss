@@ -57,7 +57,7 @@
 }
 
 .toggle-menu-wrapper {
-  @include mediaQueries.desktop {
+  @include mediaQueries.minWidthdesktop {
     display: none
   };
   .menu-button {

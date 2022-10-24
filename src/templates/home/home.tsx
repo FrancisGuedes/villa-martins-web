@@ -50,6 +50,9 @@ const Home: NextPage<IHomeProps>  = ({
               loop: true,
               skipSnaps: false
             }}
+            isPrevBtnEnabled
+            isNextBtnEnabled
+            isDotsActive
           />
         </div>
         <AppButton

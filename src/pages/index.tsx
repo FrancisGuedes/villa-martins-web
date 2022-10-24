@@ -4,28 +4,33 @@ import { useEffect, useState } from 'react'
 
 import ContentService from '../utils/contentful/content-service'
 import { MainContentTypeId } from '../utils/contentful/content-type-id'
-import { IHomeFields, INavbarFields } from '../../@types/generated/contentful'
+import { IHomeFields, INavbarFields, IStayWithUsFields } from '../../@types/generated/contentful'
 import Layout from '../components/layout/layout'
 import Navbar from '../components/navbar/navbar'
 import Home from '../templates/home/home'
+import StayWithUs from '../templates/stay-with-us/stayWithUs'
 
 interface IIndexProps {
   navbarSectionProps: INavbarFields[];
   homeSectionProps: IHomeFields[];
+  stayWithUsSectionProps: IStayWithUsFields[];
 }
 
 const Index: NextPage<IIndexProps> = ({
   navbarSectionProps, 
-  homeSectionProps
+  homeSectionProps,
+  stayWithUsSectionProps
 }: IIndexProps) => {
-  console.log("INDEX navbarProps",navbarSectionProps)
-  console.log("INDEX homeProps",homeSectionProps)
+  //console.log("INDEX navbarProps",navbarSectionProps)
+  //console.log("INDEX homeProps",homeSectionProps)
+  console.log("INDEX stayWithUsSectionProps", stayWithUsSectionProps)
 
   return (
     <>
       <Navbar navbarSectionProps={navbarSectionProps}/>
       <Layout>
         <Home homeSectionProps={homeSectionProps}/>
+        <StayWithUs stayWithUsSectionProps={stayWithUsSectionProps} />
       </Layout>
     </>
   )
@@ -42,10 +47,15 @@ export const getStaticProps: GetStaticProps = async () => {
     await ContentService.instance.getEntriesByType<IHomeFields>(MainContentTypeId.HOME)
   ).map((entry) => entry.fields);
 
+  const stayWithUsSectionProps = (
+    await ContentService.instance.getEntriesByType<IHomeFields>(MainContentTypeId.STAY_WITH_US)
+  ).map((entry) => entry.fields);
+
   return {
     props: {
       navbarSectionProps,
       homeSectionProps,
+      stayWithUsSectionProps
     },
   };
 };

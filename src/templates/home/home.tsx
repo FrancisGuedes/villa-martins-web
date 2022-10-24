@@ -5,7 +5,6 @@ import { IHomeFields } from '../../../@types/generated/contentful';
 import AppButton from '../../components/app-button/appButton';
 import Carousel from '../../components/carousel/carousel';
 import { CarouselModule, HomeButtonModule } from '../../lib/interfaces/contentful/ihome';
-import { concatHttpsAndUrlFromContentful } from '../../utils/utility';
 
 import './home.module.scss';
 

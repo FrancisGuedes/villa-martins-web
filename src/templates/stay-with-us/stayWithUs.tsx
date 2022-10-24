@@ -3,7 +3,7 @@ import { IStayWithUsFields } from '../../../@types/generated/contentful';
 
 import { StayWithUsTextModule, StayWithUsImageModule } from '../../lib/interfaces/contentful/istayWithUs';
 import Description from './description/description';
-import ImageMedia from './image-media/imagemedia';
+import ImageMedia from './image-media/imageMedia';
 
 import './stayWithUs.module.scss';
 

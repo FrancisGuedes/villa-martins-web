@@ -4,26 +4,30 @@ import { useEffect, useState } from 'react'
 
 import ContentService from '../utils/contentful/content-service'
 import { MainContentTypeId } from '../utils/contentful/content-type-id'
-import { IHomeFields, INavbarFields, IStayWithUsFields } from '../../@types/generated/contentful'
+import { IAboutFields, IHomeFields, INavbarFields, IStayWithUsFields } from '../../@types/generated/contentful'
 import Layout from '../components/layout/layout'
 import Navbar from '../components/navbar/navbar'
 import Home from '../templates/home/home'
 import StayWithUs from '../templates/stay-with-us/stayWithUs'
+import About from '../templates/about/about'
 
 interface IIndexProps {
   navbarSectionProps: INavbarFields[];
   homeSectionProps: IHomeFields[];
   stayWithUsSectionProps: IStayWithUsFields[];
+  aboutSectionProps: IAboutFields[];
 }
 
 const Index: NextPage<IIndexProps> = ({
   navbarSectionProps, 
   homeSectionProps,
-  stayWithUsSectionProps
+  stayWithUsSectionProps,
+  aboutSectionProps
 }: IIndexProps) => {
   //console.log("INDEX navbarProps",navbarSectionProps)
   //console.log("INDEX homeProps",homeSectionProps)
-  console.log("INDEX stayWithUsSectionProps", stayWithUsSectionProps)
+  //console.log("INDEX stayWithUsSectionProps", stayWithUsSectionProps)
+  console.log("INDEX aboutSectionProps", aboutSectionProps)
 
   return (
     <>
@@ -31,6 +35,7 @@ const Index: NextPage<IIndexProps> = ({
       <Layout>
         <Home homeSectionProps={homeSectionProps}/>
         <StayWithUs stayWithUsSectionProps={stayWithUsSectionProps} />
+        <About aboutSectionProps={aboutSectionProps}/>
       </Layout>
     </>
   )
@@ -48,14 +53,19 @@ export const getStaticProps: GetStaticProps = async () => {
   ).map((entry) => entry.fields);
 
   const stayWithUsSectionProps = (
-    await ContentService.instance.getEntriesByType<IHomeFields>(MainContentTypeId.STAY_WITH_US)
+    await ContentService.instance.getEntriesByType<IStayWithUsFields>(MainContentTypeId.STAY_WITH_US)
+  ).map((entry) => entry.fields);
+
+  const aboutSectionProps = (
+    await ContentService.instance.getEntriesByType<IAboutFields>(MainContentTypeId.ABOUT)
   ).map((entry) => entry.fields);
 
   return {
     props: {
       navbarSectionProps,
       homeSectionProps,
-      stayWithUsSectionProps
+      stayWithUsSectionProps,
+      aboutSectionProps,
     },
   };
 };

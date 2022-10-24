@@ -51,6 +51,12 @@ $size__big_desktop: 1801px;
   } 
 }
 
+@mixin minWidthMobile { 
+  @include media("screen", ">mobileSize") { 
+    @content; 
+  } 
+}
+
 @mixin tablet { 
   @include media("screen", ">tabletSize", "<smallDesktopSize") { 
     @content; 
@@ -70,6 +76,12 @@ $size__big_desktop: 1801px;
 }
 
 @mixin desktop { 
+  @include media("screen", "<smallDesktopSize") { 
+    @content; 
+  } 
+}
+
+@mixin minWidthdesktop { 
   @include media("screen", ">smallDesktopSize") { 
     @content; 
   } 

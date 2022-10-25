@@ -10,7 +10,7 @@ interface AppButtonProps extends React.HTMLProps<HTMLButtonElement> {
   className?: string | undefined;
   disabled?: boolean | undefined;
   rel: string;
-  href: string;
+  href?: string | undefined;
   target?: string;
 }
 

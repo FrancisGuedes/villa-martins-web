@@ -1,8 +1,8 @@
 import { AboutModule, AboutTextContentModule } from '../../../lib/interfaces/contentful/iabout';
-import './ameneties.module.scss';
 import TextDescription from './text-description/textDescription';
 import Utilities from './utilities/utilities';
 
+import './ameneties.module.scss';
 interface AmenetiesProps {
   aboutData: AboutModule.IAbout;
 }

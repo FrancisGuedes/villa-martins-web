@@ -1,10 +1,11 @@
 import { IAboutFields } from '../../../@types/generated/contentful';
+
 import AppButton from '../../components/app-button/appButton';
-import AppParagraph from '../../components/app-paragraph/appParagraph';
 import { AboutImageContentModule, AboutModule } from '../../lib/interfaces/contentful/iabout';
 import { concatHttpsAndUrlFromContentful } from '../../utils/utility';
-import './about.module.scss';
 import Ameneties from './ameneties/ameneties';
+
+import './about.module.scss';
 
 interface AboutProps {
   aboutSectionProps: IAboutFields[];

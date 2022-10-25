@@ -47,6 +47,10 @@ export type LabelDots = {
   defaultClassName: string
 }
 
+type LabelButton = {
+  rel: string
+}
+
 const Carousel = ({
   children,
   slides,
@@ -68,6 +72,7 @@ const Carousel = ({
 
   const labelCarousel: LabelCarouselClassName = {...functionalityAlias.component.carousel.main};
   const labelCarouselDots: LabelDots = {...functionalityAlias.component.carousel.carouselDots};
+  const labelCarouselButton: LabelButton = {...functionalityAlias.component.carousel.button};
   let classes: LabelCarouselClassName = combineObjects(labelCarousel, className);
   let classeDots: string = createClassName(labelCarouselDots.defaultClassName, classNameDots);
 
@@ -118,14 +123,16 @@ const Carousel = ({
           />
         </div>
         <PrevButton 
-          onClick={scrollPrev} 
+          onClick={scrollPrev}
           enabled={prevBtnEnabled}
-          active={isPrevBtnEnabled}
+          active={isPrevBtnEnabled} 
+          rel={labelCarouselButton.rel}       
         />
         <NextButton 
-          onClick={scrollNext} 
+          onClick={scrollNext}
           enabled={nextBtnEnabled}
           active={isNextBtnEnabled}
+          rel={labelCarouselButton.rel}
         />
       </div>
       <CarouselDots 

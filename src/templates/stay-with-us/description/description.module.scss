@@ -17,7 +17,18 @@
     align-items: flex-start;
     text-align: left;
   }
+  .paragraph-wrapper {
+    width: 90%;
+    .stay-with-us_paragraph {
+      margin: 10px;
+      @include mediaQueries.desktop {
+        font-size: 14px;
+      }
+    }
+  }
   .paragraph-wrapper > * {
-    margin: 5px;
+    @include mediaQueries.maxWidthMobile {
+      margin: 22px 0;
+    }
   }
 }

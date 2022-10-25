@@ -3,7 +3,7 @@
 
 .stay-with-us_wrapper {
   height: 100vh;
-  min-height: vars.$sectionMinHeight;
+  min-height: 737px;
   position: relative;
   @include mediaQueries.maxWidthMobile {
     height: 100vh;

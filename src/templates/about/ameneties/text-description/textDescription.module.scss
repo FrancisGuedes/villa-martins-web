@@ -3,16 +3,21 @@
 @use '../../../../styles/core/mediaQueries';
 
 .ameneties_paragraph-container {
+  @include mediaQueries.maxWidthMobile {
+    padding-bottom: 30px;
+  };
   .title-wrapper {
     border: solid 1px colors.$black;
     border-radius: 48px/118px;
-    width: 194px;
+    width: 284px;
     position: relative;
     text-align: center;
     background-color: colors.$black;
     margin-bottom: 40px;
+    @include mediaQueries.maxWidthMobile {
+      width: 232px;
+    };
     h1 {
-      font-size: 25px;
       margin: 10px 0;
       color: colors.$white;
     }
@@ -23,6 +28,7 @@
       font-size: 20px;
       font-weight: fonts.$font-regular;
       @include mediaQueries.desktop {
+        margin: 22px 0;
         font-size: 14px;
       };
     }

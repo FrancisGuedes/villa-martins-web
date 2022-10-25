@@ -16,13 +16,11 @@ const Description = ({
     paragraph: StayWithUsTextModule.IParagraph, 
     index: number) => {
       let paragraphValue: string = paragraph['fields']['paragraphContent']['content'][0]['content'][0].value;
-
-      let paragraphName: string = paragraph['fields'].name;
-
+      
       return (
         <div key={index}>
           <AppParagraph
-            className={`${paragraphName}`}
+            className='stay-with-us_paragraph'
           >
             {paragraphValue}
           </AppParagraph>

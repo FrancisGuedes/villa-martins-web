@@ -3,11 +3,15 @@
 
 
 .ameneties-container {
-  height: 61vh;
   width: 50%;
-  min-height: 618px;
+  min-height: 633px;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: space-between;
   @include mediaQueries.desktop {
     width: 70%;
+    justify-content: center;
   };
   @include mediaQueries.maxWidthMobile {
     width: 90%,

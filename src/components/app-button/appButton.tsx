@@ -9,6 +9,9 @@ interface AppButtonProps extends React.HTMLProps<HTMLButtonElement> {
   ariaLabel: string;
   className?: string | undefined;
   disabled?: boolean | undefined;
+  rel: string;
+  href: string;
+  target?: string;
 }
 
 type LabelAppButton = {
@@ -21,7 +24,10 @@ const AppButton = ({
   onClick,
   type,
   ariaLabel,
-  disabled=false
+  disabled=false,
+  rel,
+  href,
+  target
 }: AppButtonProps) => {
   
   const labelAppButton: LabelAppButton = {...functionalityAlias.component.appButton};
@@ -35,7 +41,13 @@ const AppButton = ({
       aria-label={ariaLabel}
       disabled={disabled}
     >
-      {children}
+      <a
+        rel={rel}
+        href={href}
+        target={target}
+      >
+        {children}
+      </a>
     </button>
   );
 }

@@ -1,0 +1,15 @@
+@use './utilities/utilities.module.scss';
+@use '../../../styles/core/mediaQueries';
+
+
+.ameneties-container {
+  height: 61vh;
+  width: 50%;
+  min-height: 618px;
+  @include mediaQueries.desktop {
+    width: 70%;
+  };
+  @include mediaQueries.maxWidthMobile {
+    width: 90%,
+  };
+}

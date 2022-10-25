@@ -1,0 +1,42 @@
+@use '../../../../styles/core/mediaQueries';
+
+.utilities-container {
+  border: solid 1px black;
+  border-radius: 55px/180px;
+  padding: 34px 10%;
+  min-width: 456px;
+  @include mediaQueries.desktop {
+    min-width: 456px;
+  };
+  @include mediaQueries.maxWidthMobile {
+    min-width: 339px;
+  };
+  h4 {
+    margin-top: 0;
+  }
+  .utilities-list {
+    max-height: 200px;
+    height: 163px;
+    max-width: 100%;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    @include mediaQueries.desktop {
+      height: 134px;
+    };
+    div {
+      flex: 1 0 auto;
+      min-width: 203px;
+      max-width: 50%;
+      @include mediaQueries.maxWidthMobile {
+        min-width: 158px;
+        max-width: 43%;
+      };
+      .utilities-item {
+        @include mediaQueries.desktop {
+          font-size: 12px;
+        };
+      }
+    }
+  }
+}

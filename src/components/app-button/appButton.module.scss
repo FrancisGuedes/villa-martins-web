@@ -13,6 +13,7 @@
   border-color: transparent;
   background-color: colors.$black;
   color: colors.$white;
+  cursor: pointer;
   &:focus {
     outline-style: none;
   }

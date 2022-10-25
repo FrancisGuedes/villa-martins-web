@@ -56,16 +56,13 @@ const Home: NextPage<IHomeProps>  = ({
         </div>
         <AppButton
           type='button'
-          className='stay-with-us-button'
+          className='home-button'
           ariaLabel={buttonDataFields.ariaLabel}
+          rel={buttonLinkFields.rel}
+          href={buttonLinkFields.href}
+          target='_blank'
         >
-          <a
-            rel={buttonLinkFields.rel}
-            href={buttonLinkFields.href}
-            target='_blank'
-          >
-            {buttonLinkFields.title}
-          </a>
+          {buttonLinkFields.title}
         </AppButton>
       </section>
     </>

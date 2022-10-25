@@ -39,23 +39,18 @@ const About = ({
             />
           </span>
         </div>
-
         <div className="about-button-wrapper">
           <AppButton
             type='button'
             className='about-button'
             ariaLabel={buttonName}
+            rel={buttonHrefData.rel}
+            href={buttonHrefData.href}
+            target='_blank'
           >
-            <a
-              rel={buttonHrefData.rel}
-              href={buttonHrefData.href}
-              target='_blank'
-            >
-              {buttonName}
-            </a>
+            {buttonName}
           </AppButton>
         </div>
-
       </section>
     </>
   );

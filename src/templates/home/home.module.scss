@@ -1,17 +1,19 @@
 @use '../../styles/core/mediaQueries';
 
 .home-wrapper {
-  min-height: calc(100vh - 18vh);
+  /* min-height: calc(100vh - 18vh);
   @include mediaQueries.minWidthBigDesktops {
     min-height: calc(100vh - 14vw);
   }
   @include mediaQueries.tablet {
     min-height: calc(100vh - 16vh);
-  };
+  }; */
+  padding-bottom: 30px;
+  padding-top: 0;
   .carousel-wrapper {
     position: relative;
   }
-  .stay-with-us-button {
+  .home-button {
     margin: 30px auto;
     display: flex;
     align-content: center;

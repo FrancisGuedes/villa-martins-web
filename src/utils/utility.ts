@@ -1,4 +1,4 @@
-import { LabelCarouselClassName } from "../components/carousel/carousel";
+import { LabelCarouselClassName, LabelCarouselSlideTextClassName } from "../components/carousel/carousel";
 import { HTTPS } from "../lib/endpoints";
 
 export function createClassName(defaultClass: string, classes?: string): string {
@@ -41,10 +41,10 @@ export function getWindowSize(): IWindowSize | undefined {
   }
 }
 
-export function combineObjects(
-  defaultClass: LabelCarouselClassName, 
-  classes: LabelCarouselClassName | undefined
-  ): LabelCarouselClassName {
+export function combineObjects<T extends LabelCarouselSlideTextClassName | LabelCarouselClassName>(
+  defaultClass: T,
+  classes: T | undefined
+  ): T {
     if(classes) {
       let merged = Object.entries(defaultClass).reduce((acc, [key, value]) => 
       // if key is already in defaultClass, add the values, otherwise, create new pair

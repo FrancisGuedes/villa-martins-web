@@ -20,10 +20,16 @@ import CarouselDots from './carousel-dots/carouselDots';
 
 import './carousel.module.scss';
 import { StayWithUsImageModule } from '../../lib/interfaces/contentful/istayWithUs';
+import { ReviewModule } from '../../lib/interfaces/contentful/ireview';
 
 interface CarouselProps {
-  children?: React.ReactNode | React.ReactNode[] | undefined;
-  slides: React.ReactNode[] | CarouselModule.IFields[] | StayWithUsImageModule.IImageMedia[];
+  children?: React.ReactNode | 
+    React.ReactNode[] | 
+    undefined;
+  slides: React.ReactNode[] | 
+    CarouselModule.IFields[] | 
+    StayWithUsImageModule.IImageMedia[] | 
+    ReviewModule.ICardReview[];
   className?: LabelCarouselClassName | undefined;
   emblaOptions?: EmblaOptionsType | undefined;
   autoplayOptions?: AutoplayOptionsType | undefined;
@@ -31,6 +37,8 @@ interface CarouselProps {
   isNextBtnEnabled: boolean;
   isDotsActive: boolean;
   classNameDots?: string | undefined;
+  isSlideImageActive: boolean;
+  classNameTextSlide?: LabelCarouselSlideTextClassName | undefined;
 }
 
 export type LabelCarouselClassName = {
@@ -47,8 +55,17 @@ export type LabelDots = {
   defaultClassName: string
 }
 
-type LabelButton = {
+export type LabelButton = {
   rel: string
+}
+
+export type LabelCarouselSlideTextClassName = {
+  [key: string]: string | number,
+  header: string,
+  title: string,
+  rating: string,
+  date: string,
+  description: string
 }
 
 const Carousel = ({
@@ -60,7 +77,9 @@ const Carousel = ({
   isPrevBtnEnabled,
   isNextBtnEnabled,
   isDotsActive,
-  classNameDots
+  classNameDots,
+  isSlideImageActive,
+  classNameTextSlide
 }: CarouselProps) => {
   const autoplay: React.MutableRefObject<AutoplayType> = useRef(Autoplay(autoplayOptions));
   const [emblaRef, emblaApi] = useEmblaCarousel(emblaOptions, [autoplay.current]);
@@ -73,8 +92,10 @@ const Carousel = ({
   const labelCarousel: LabelCarouselClassName = {...functionalityAlias.component.carousel.main};
   const labelCarouselDots: LabelDots = {...functionalityAlias.component.carousel.carouselDots};
   const labelCarouselButton: LabelButton = {...functionalityAlias.component.carousel.button};
+  const labelTextSlide: LabelCarouselSlideTextClassName = {...functionalityAlias.component.carousel.cardReview}
   let classes: LabelCarouselClassName = combineObjects(labelCarousel, className);
   let classeDots: string = createClassName(labelCarouselDots.defaultClassName, classNameDots);
+  let classesTextSlide: LabelCarouselSlideTextClassName = combineObjects(labelTextSlide, classNameTextSlide);
 
   const scrollTo: (index: number) => void | undefined = useCallback((index: number) => 
   emblaApi && emblaApi.scrollTo(index), [emblaApi]);
@@ -120,6 +141,8 @@ const Carousel = ({
           <CarouselSlide
             slides={slides}
             className={classes}
+            isSlideImageActive={isSlideImageActive}
+            classNameTextSlide={classesTextSlide}
           />
         </div>
         <PrevButton 

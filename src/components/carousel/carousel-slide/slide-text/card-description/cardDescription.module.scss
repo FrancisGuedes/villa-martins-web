@@ -1,0 +1,27 @@
+@use '../../../../../styles/core/mediaQueries';
+
+
+.card-description {
+  margin-top: 22px;
+  font-size: 16px;
+  line-height: 24px;
+  @include mediaQueries.desktop {
+    font-size: 14px;
+  };
+  .expandable-comment_button {
+    width: 100%;
+    height: auto;
+    font-size: 16px;
+    border-radius: none;
+    letter-spacing: 1px;
+    text-transform: none;
+    border-color: none;
+    background-color: transparent;
+    color: black;
+    cursor: pointer;
+    border: 0;
+    text-decoration: underline;
+    padding: 5px 0;
+    text-align: left;
+  }
+}

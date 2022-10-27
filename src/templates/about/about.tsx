@@ -14,8 +14,6 @@ interface AboutProps {
 const About = ({
   aboutSectionProps
 }: AboutProps) => {
-  console.log("aboutSectionProps", aboutSectionProps)
-
   const aboutData: AboutModule.IAbout = new Map(Object.entries(aboutSectionProps))
   .values()
   .next()

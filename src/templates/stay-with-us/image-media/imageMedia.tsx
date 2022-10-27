@@ -53,6 +53,7 @@ const ImageMedia = ({
           isNextBtnEnabled={false}
           isDotsActive={false}
           className={classNames}
+          isSlideImageActive
         />
       </div>
     </div>

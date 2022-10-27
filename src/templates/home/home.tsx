@@ -52,6 +52,7 @@ const Home: NextPage<IHomeProps>  = ({
             isPrevBtnEnabled
             isNextBtnEnabled
             isDotsActive
+            isSlideImageActive
           />
         </div>
         <AppButton

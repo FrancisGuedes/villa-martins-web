@@ -6,3 +6,9 @@
 @use '../components/carousel/carousel-buttons/carouselButtons.module.scss';
 @use '../components/carousel/carousel-slide/carouselSlide.module.scss';
 @use '../components/carousel/carousel-dots/carouselDots.module.scss';
+@use '../components/carousel/carousel-slide/slide-image/slideImage.module.scss';
+@use '../components/carousel/carousel-slide/slide-text/slideText.module.scss';
+@use '../components/carousel/carousel-slide/slide-text/card-header/cardHeader.module.scss';
+@use '../components/carousel/carousel-slide/slide-text/card-description/cardDescription.module.scss';
+
+@use '../components/star-rating/starRating.module.scss';

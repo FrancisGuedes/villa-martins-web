@@ -52,6 +52,7 @@ ul {
 p {
   margin: 5px 0;
   font-size: 20px;
+  line-height: 24px;
 }
 
 h1 {
@@ -62,6 +63,11 @@ h1 {
     font-size: 30px;
   };
 }
+
+h3, h5 {
+  margin: 6px 0;
+  font-weight: fonts.$font-medium;
+} 
 
 section {
   padding: 15px 0;

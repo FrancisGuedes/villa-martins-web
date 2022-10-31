@@ -4,5 +4,6 @@ export enum MainContentTypeId {
   STAY_WITH_US = 'stayWithUs',
   ABOUT = 'about',
   REVIEW = 'review',
+  CONTACT = 'contact',
   FOOTER = 'footer'
 }

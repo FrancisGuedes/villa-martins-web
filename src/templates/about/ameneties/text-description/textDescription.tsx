@@ -18,9 +18,6 @@ const TextDescription = ({
     textContent: AboutTextContentModule.IAboutTextContent, 
     index: number) => {
       let paragraphValue: string = textContent['fields']['paragraphContent']['content'][0]['content'][0].value;
-      let paragraphName: string = textContent['fields'].name;
-
-      console.log("textContent", paragraphName)
 
       return (
         <div key={index}>

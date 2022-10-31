@@ -8,6 +8,7 @@ interface AppLinkProps {
   rel: string,
   className?: string | undefined,
   children?: React.ReactNode | undefined,
+  target?: string;
 }
 
 type LabelAppLink = {
@@ -19,7 +20,8 @@ export default function AppLink({
   onClick, 
   rel, 
   className, 
-  children 
+  children,
+  target 
 }: AppLinkProps) {
   const labelAppLink: LabelAppLink = {...functionalityAlias.component.appLink};
   const classes: string = createClassName(labelAppLink.defaultClassName, className);
@@ -30,7 +32,11 @@ export default function AppLink({
       rel={rel} 
       className={classes}
       >
-        <a onClick={onClick}>
+        <a 
+          onClick={onClick}
+          target={target}
+          className={`${classes} anchor-link`}
+        >
           {children}
         </a>
     </Link>

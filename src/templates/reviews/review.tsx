@@ -19,32 +19,6 @@ const Review = ({
   const title: string = reviewData.title;
   const cardReview: ReviewModule.ICardReview[] = reviewData['cardReviews'];
 
-  /* const renderReviews = cardReview.map((reviewCard:any, index:any) => {
-    let reviewCardFields: ReviewModule.IFields = reviewCard['fields'];
-    let reviewCardDescription: ReviewModule.IContent2 = reviewCardFields['theReview']['content'][0]['content'][0];
-
-    console.log("VALUE: ", reviewCardDescription);
-    return (
-      <div key={index}>
-        <div className="card-header">
-          <div className="card-header_title">
-            {reviewCardFields.reviewer}
-          </div>
-          <div className="card-header_rating">
-            {reviewCardFields.stars}
-          </div>
-          <div className="card-header_date">
-            {reviewCardFields.reviewMonth} {reviewCardFields.reviewYear} / {reviewCardFields.source}
-          </div>
-        </div>
-        <div className="card-description">
-          {reviewCardDescription.value}
-        </div>
-      </div>
-    )
-  }) */
-  console.log("reviewData", reviewSectionProps);
-
   const classNames: LabelCarouselClassName = {
     embla: 'review_embla',
     embla_viewport: 'review_embla_viewport',

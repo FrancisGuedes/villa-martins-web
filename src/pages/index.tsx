@@ -4,13 +4,16 @@ import { useEffect, useState } from 'react'
 
 import ContentService from '../utils/contentful/content-service'
 import { MainContentTypeId } from '../utils/contentful/content-type-id'
-import { IAboutFields, IHomeFields, INavbarFields, IReviewFields, IStayWithUsFields } from '../../@types/generated/contentful'
+import { IAboutFields, IContactFields, IHomeFields, INavbarFields, IReviewFields, IStayWithUsFields } from '../../@types/generated/contentful'
 import Layout from '../components/layout/layout'
 import Navbar from '../components/navbar/navbar'
 import Home from '../templates/home/home'
 import StayWithUs from '../templates/stay-with-us/stayWithUs'
 import About from '../templates/about/about'
 import Review from '../templates/reviews/review'
+import { IFooterFields } from '../../@types/generated/contentful.d';
+import Footer from '../templates/footer/footer'
+import Contact from '../templates/contact/contact'
 
 interface IIndexProps {
   navbarSectionProps: INavbarFields[];
@@ -18,6 +21,8 @@ interface IIndexProps {
   stayWithUsSectionProps: IStayWithUsFields[];
   aboutSectionProps: IAboutFields[];
   reviewSectionProps: IReviewFields[];
+  contactSectionProps: IContactFields[];
+  footerSectionProps: IFooterFields[];
 }
 
 const Index: NextPage<IIndexProps> = ({
@@ -25,19 +30,21 @@ const Index: NextPage<IIndexProps> = ({
   homeSectionProps,
   stayWithUsSectionProps,
   aboutSectionProps,
-  reviewSectionProps
+  reviewSectionProps,
+  contactSectionProps,
+  footerSectionProps
 }: IIndexProps) => {
-  //console.log("INDEX navbarProps",navbarSectionProps)
-
   return (
     <>
       <Navbar navbarSectionProps={navbarSectionProps}/>
       <Layout>
         <Home homeSectionProps={homeSectionProps}/>
-        <StayWithUs stayWithUsSectionProps={stayWithUsSectionProps} />
+        <StayWithUs stayWithUsSectionProps={stayWithUsSectionProps}/>
         <About aboutSectionProps={aboutSectionProps}/>
         <Review reviewSectionProps={reviewSectionProps}/>
       </Layout>
+      <Contact contactSectionProps={contactSectionProps}/>
+      <Footer footerSectionProps={footerSectionProps} />
     </>
   )
 }
@@ -65,6 +72,14 @@ export const getStaticProps: GetStaticProps = async () => {
     await ContentService.instance.getEntriesByType<IReviewFields>(MainContentTypeId.REVIEW)
   ).map((entry) => entry.fields);
 
+  const contactSectionProps = (
+    await ContentService.instance.getEntriesByType<IContactFields>(MainContentTypeId.CONTACT)
+  ).map((entry) => entry.fields);
+
+  const footerSectionProps = (
+    await ContentService.instance.getEntriesByType<IFooterFields>(MainContentTypeId.FOOTER)
+  ).map((entry) => entry.fields);
+
   return {
     props: {
       navbarSectionProps,
@@ -72,6 +87,8 @@ export const getStaticProps: GetStaticProps = async () => {
       stayWithUsSectionProps,
       aboutSectionProps,
       reviewSectionProps,
+      contactSectionProps,
+      footerSectionProps
     },
   };
 };

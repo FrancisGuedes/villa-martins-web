@@ -1,9 +1,7 @@
-import Image from 'next/image';
 import { IContactFields } from '../../../@types/generated/contentful';
 
-import AppLink from '../../components/app-link/appLink';
 import { ContactModule } from '../../lib/interfaces/contentful/icontact';
-import { concatHttpsAndUrlFromContentful } from '../../utils/utility';
+import ContactLink from './contact-link/contactLink';
 
 import './contact.module.scss';
 
@@ -29,26 +27,17 @@ const Contact = ({
     
     const renderAppLinks = contactLinks['fields']['links'].map((link: ContactModule.ILink, index: number) => {
       const linkMediaFile: ContactModule.File = link.fields.media.fields.file;
-      const svgUrl: string = concatHttpsAndUrlFromContentful(linkMediaFile.url);
       const svgClassName: string = link.fields.media.fields.title;
-
+      const linkFields: ContactModule.IFields2 = link.fields;
+      
       return (
         <>
           <div key={index}>
-            <AppLink 
-              href={link.fields.href} 
-              rel={link.fields.alt}
-              className={`${link.fields.id} link`}
-              target='_blank'
-            >
-              <Image 
-                src={svgUrl} 
-                height={20}
-                width={20}
-                className={`${svgClassName} svg-icon`}
-              /> 
-              &nbsp;{link.fields.name}
-            </AppLink>
+            <ContactLink 
+              linkMediaFile={linkMediaFile}
+              linkFields={linkFields}
+              svgClassName={svgClassName} 
+            />
           </div>
         </>
       );

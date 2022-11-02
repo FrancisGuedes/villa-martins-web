@@ -1,0 +1,26 @@
+@use '../../styles/core/fonts';
+@use '../../styles/core/colors';
+@use '../../styles/core/mediaQueries';
+
+.contact-link {
+  width: 33%;
+  @include mediaQueries.desktop {
+    margin: 10px 0;
+    border-top: 1px solid colors.$footerBorder;
+    width: auto;
+    padding-top: 20px;
+    &.direct-contact {
+      border-top: 0;
+    }
+  }
+  h3 {
+    margin-bottom: 20px;
+    font-weight: fonts.$font-semi-bold;
+  }
+  div {
+    .link {
+      display: flex;
+      margin: 10px 0;
+    }
+  }
+}

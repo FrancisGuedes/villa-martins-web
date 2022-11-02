@@ -1,4 +1,5 @@
 import { LabelCarouselClassName, LabelCarouselSlideTextClassName } from "../components/carousel/carousel";
+import { LabelSocialMedia } from "../components/social-media/socialMedia";
 import { HTTPS } from "../lib/endpoints";
 
 export function createClassName(defaultClass: string, classes?: string): string {
@@ -41,7 +42,7 @@ export function getWindowSize(): IWindowSize | undefined {
   }
 }
 
-export function combineObjects<T extends LabelCarouselSlideTextClassName | LabelCarouselClassName>(
+export function combineObjects<T extends LabelCarouselSlideTextClassName | LabelCarouselClassName | LabelSocialMedia>(
   defaultClass: T,
   classes: T | undefined
   ): T {

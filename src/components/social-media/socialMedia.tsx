@@ -1,6 +1,6 @@
 import { ContactModule } from '../../lib/interfaces/contentful/icontact';
 import { functionalityAlias } from '../../utils/strings';
-import { combineObjects, createClassName } from '../../utils/utility';
+import { combineObjects } from '../../utils/utility';
 import MediaLink from './media-link/mediaLink';
 
 import './socialMedia.module.scss';

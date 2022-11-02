@@ -35,12 +35,12 @@ const CardDescription = ({
     <>
       <div className={classNameTextSlide?.description} key={index}>
         {
-          toggleReviewCommentStatus[index] && (reviewCardDescription.value.length > 197) ?
+          toggleReviewCommentStatus[index] && (reviewCardDescription.value.length > 185) ?
             reviewCardDescription.value :
-            validateTextLength(reviewCardDescription.value, 197)
+            validateTextLength(reviewCardDescription.value, 185)
         }
         { 
-          reviewCardDescription.value.length > 197 ?
+          reviewCardDescription.value.length > 185 ?
           <AppButton
             type='button'
             onClick={() => handleReviewComment(index)}

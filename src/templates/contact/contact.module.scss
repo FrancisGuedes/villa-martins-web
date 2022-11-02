@@ -1,7 +1,6 @@
 @use '../../styles/core/mediaQueries';
 @use '../../styles/core/colors';
 @use '../../styles/core/vars';
-@use '../../styles/core/fonts';
 
 .contact-wrapper {
   background-color: colors.$footer;
@@ -29,29 +28,6 @@
     height: auto;
     @include mediaQueries.desktop {
       flex-direction: column;
-    }
-    
-    .contact-link {
-      width: 33%;
-      @include mediaQueries.desktop {
-        margin: 10px 0;
-        border-top: 1px solid #e5d4d4;
-        width: auto;
-        padding-top: 20px;
-        &.direct-contact {
-          border-top: 0;
-        }
-      }
-      h3 {
-        margin-bottom: 20px;
-        font-weight: fonts.$font-semi-bold;
-      }
-      div {
-        .link {
-          display: flex;
-          margin: 10px 0;
-        }
-      }
     }
   }
 }

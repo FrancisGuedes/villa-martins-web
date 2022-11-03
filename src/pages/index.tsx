@@ -34,9 +34,25 @@ const Index: NextPage<IIndexProps> = ({
   contactSectionProps,
   footerSectionProps
 }: IIndexProps) => {
+  const [isModalOpen, setModalOpen] = useState<boolean>(false);
+
+  function handleModal() {
+    setModalOpen((modalOpen) => !modalOpen);
+  }
+
+  function closeModal() {
+    setModalOpen(false);
+  }
+
   return (
     <>
-      <Navbar navbarSectionProps={navbarSectionProps}/>
+      <Navbar 
+        navbarSectionProps={navbarSectionProps}
+        contactSectionProps={contactSectionProps}
+        handleModal={handleModal}
+        closeModal={closeModal}
+        isModalOpen={isModalOpen}
+      />
       <Layout>
         <Home homeSectionProps={homeSectionProps}/>
         <StayWithUs stayWithUsSectionProps={stayWithUsSectionProps}/>

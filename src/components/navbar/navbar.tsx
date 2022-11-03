@@ -2,23 +2,38 @@ import { NextPage } from 'next';
 import { useEffect, useState } from 'react';
 import Link from 'next/link'
 
-import { INavbarFields } from '../../../@types/generated/contentful';
+import { IContactFields, INavbarFields } from '../../../@types/generated/contentful';
 
 import Logo from '../logo/logo';
+import AppLink from '../app-link/appLink';
 import { NavbarModule } from '../../lib/interfaces/contentful/inavbar';
 import { LogoModule } from '../../lib/interfaces/contentful/ilogo';
 import { getWindowSize, IWindowSize } from '../../utils/utility';
 
 import './navbar.module.scss';
 import tabletSizeWindow from './navbar.module.scss';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTimes } from '@fortawesome/free-solid-svg-icons';
+import SocialMedia, { LabelSocialMedia } from '../social-media/socialMedia';
+import { ContactModule } from '../../lib/interfaces/contentful/icontact';
+import Modal from '../modal/modal';
+import { strings } from '../../utils/strings';
 
 
 interface INavbarProps {
   navbarSectionProps: INavbarFields[];
+  contactSectionProps: IContactFields[];
+  handleModal: () => void;
+  closeModal: () => void;
+  isModalOpen: boolean;
 }
 
 const Navbar: NextPage<INavbarProps> = ({ 
-  navbarSectionProps 
+  navbarSectionProps,
+  contactSectionProps,
+  handleModal,
+  closeModal,
+  isModalOpen 
 }: INavbarProps) => {
   const [contentfulNavbarData, setContentfulNavbarData] = useState<NavbarModule.INavbar>();
   const [isNavbarActive, setIsNavbarActive] = useState<boolean>(false);
@@ -52,10 +67,11 @@ const Navbar: NextPage<INavbarProps> = ({
     handleDomWindowResize();
 
     handleDomNavbarActivity();
-  }, [contentfulNavbarData, lastScrollY, mobileNavOpen]);
 
+  }, [contentfulNavbarData, lastScrollY, mobileNavOpen, isModalOpen]);
 
   const renderNavlinks: JSX.Element[] = navlinksData.map((navlinkInfo) => {
+
     return (
         <li className={`${navlinkInfo.fields.name}-title`} key={navlinkInfo.sys.id}>
           <Link
@@ -64,7 +80,11 @@ const Navbar: NextPage<INavbarProps> = ({
             href={`#${navlinkInfo.fields.href}`}
           >
               <a onClick={() => {
-                  windowWidth! <= windowWidthTablet ? menuToggle() : ''
+                  windowWidth! <= windowWidthTablet ? menuToggle() : '';
+                  // Modal will be triggered only on contact navlink
+                  if(navlinkInfo.fields.href === 'contact') {
+                    handleModal();
+                  };
                 }}>
                   {navlinkInfo.fields.title}
               </a>
@@ -118,6 +138,19 @@ const Navbar: NextPage<INavbarProps> = ({
     }
   }
 
+  const contactData: ContactModule.ISocialMediaLinks[] = new Map(Object.entries(contactSectionProps))
+  .values()
+  .next()
+  .value['socialMediaLinks'];
+
+  const classeSocialMedia: LabelSocialMedia = {
+    contactLink: "modal-contact-link", 
+    link: "modal-link", 
+    svgIcon: "modal-svg-icon"
+  }
+
+  const labelModalContent = {...strings.component.navbar.modalContent}
+
   return (
     <header className={`header-navbar-active ${isNavbarActive ? 'hidden' : ''}`}>
       <Logo 
@@ -159,6 +192,32 @@ const Navbar: NextPage<INavbarProps> = ({
         </ul>
       </nav>
       {/* END DESKTOP MENU */}
+
+      {/* BEGIN MODAL */}
+      { isModalOpen 
+          ?
+            <Modal
+              isModalBakgroundActive 
+              isSocialMediaActive 
+              socialMediaProps={contactData}
+              handleModal={handleModal}
+              closeModal={closeModal}
+              classNameSocialMedia={classeSocialMedia}
+            >
+              <div className="contact-modal-content">
+                <h1>{labelModalContent.title}</h1>
+                <AppLink 
+                  href={`mailto:${labelModalContent.mail}`}
+                  className='mail-text'
+                >
+                  <span>{labelModalContent.mail}</span>
+                </AppLink>
+              </div>
+            </Modal>
+          :
+            null
+      }
+      {/* END MODAL */}
     </header>
   );
 }

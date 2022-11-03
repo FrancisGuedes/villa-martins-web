@@ -1,0 +1,63 @@
+@use '../../styles/core/colors';
+@use '../../styles/core/fonts';
+@use '../../styles/core/mediaQueries';
+
+.modal-background {
+  //backdrop-filter: blur(1px);
+  background-color: colors.$modalFullBackground;
+  position: inherit;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+}
+#modal {
+  top: 10vw;
+  left: 7vw;
+  right: 7vw;
+  bottom: 10vw;
+  position: fixed;
+  background-color: colors.$modalContentBackground;
+  .modal-close {
+    position: inherit;
+    top: 12vw;
+    right: 9vw;
+    .icon-close-modal {
+      width: 35px;
+      height: 35px;
+    }
+  }
+  .contact-social {
+    width: 100%;
+    bottom: 7vh;
+    position: absolute;
+    text-align: center;
+    h3 {
+      margin-bottom: 0;
+      padding-bottom: 0;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      font-size: 11px;
+    }
+    .social-list {
+      display: flex;
+      flex-wrap: nowrap;
+      align-content: center;
+      align-items: center;
+      justify-content: center;
+      flex-direction: row;
+      height: 4vw;
+      .modal-contact-link {
+        width: auto;
+        display: inherit;
+        border-top: 0;
+        .modal-link {
+          margin: 10px 10px;
+          &.instagram {
+            justify-content: center;
+          }
+        }
+      }
+    }
+  }
+}

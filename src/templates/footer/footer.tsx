@@ -18,8 +18,6 @@ const Footer = ({
 
   const craftedFields: FooterModule.IFields = footerData.craftedPersonContainerLink.fields;
 
-  console.log("footerSectionProps: ", footerData);
-
   return (
     <>
       <footer id="footer" className='footer-wrapper'>
@@ -31,7 +29,6 @@ const Footer = ({
             <div className="crafted-by">
               <AppLink
                 className='crafted-link'
-                rel={craftedFields.rel} 
                 href={craftedFields.href}
               >
                 {footerData.craftedTitle}&nbsp;{footerData.craftedPersonName}&nbsp;&#9829;

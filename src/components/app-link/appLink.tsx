@@ -5,7 +5,7 @@ import { createClassName } from '../../utils/utility'
 interface AppLinkProps {
   href: string,
   onClick?: () => void | undefined,
-  rel: string,
+  rel?: string,
   className?: string | undefined,
   children?: React.ReactNode | undefined,
   target?: string;
@@ -18,7 +18,7 @@ type LabelAppLink = {
 export default function AppLink({ 
   href, 
   onClick, 
-  rel, 
+  rel='canonical', 
   className, 
   children,
   target 

@@ -29,8 +29,7 @@ const MediaLink = ({
   return (
     <>
       <AppLink 
-        href={linkFields.href} 
-        rel={linkFields.alt}
+        href={linkFields.href}
         className={`${linkFields.id} ${className?.link}`}
         target='_blank'
       >

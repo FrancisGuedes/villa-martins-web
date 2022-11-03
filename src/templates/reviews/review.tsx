@@ -30,7 +30,7 @@ const Review = ({
 
   return (
     <>
-      <section id="review" className='review-wrapper'>
+      <section id="reviews" className='review-wrapper'>
         <div className='title-wrapper'>
           <h1>
             {title}

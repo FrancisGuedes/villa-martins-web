@@ -1,19 +1,17 @@
-import type { NextPage, GetStaticProps, GetStaticPaths, GetServerSideProps } from 'next'
-import { ContentfulClientApi, createClient, EntryCollection } from 'contentful'
-import { useEffect, useState } from 'react'
+import type { NextPage, GetStaticProps, GetStaticPaths, GetServerSideProps } from 'next';
+import { useCallback, useEffect, useState } from 'react';
+import { IAboutFields, IContactFields, IHomeFields, INavbarFields, IReviewFields, IStayWithUsFields, IFooterFields } from '../../@types/generated/contentful';
 
-import ContentService from '../utils/contentful/content-service'
-import { MainContentTypeId } from '../utils/contentful/content-type-id'
-import { IAboutFields, IContactFields, IHomeFields, INavbarFields, IReviewFields, IStayWithUsFields } from '../../@types/generated/contentful'
-import Layout from '../components/layout/layout'
-import Navbar from '../components/navbar/navbar'
-import Home from '../templates/home/home'
-import StayWithUs from '../templates/stay-with-us/stayWithUs'
-import About from '../templates/about/about'
-import Review from '../templates/reviews/review'
-import { IFooterFields } from '../../@types/generated/contentful.d';
-import Footer from '../templates/footer/footer'
-import Contact from '../templates/contact/contact'
+import ContentService from '../utils/contentful/content-service';
+import { MainContentTypeId } from '../utils/contentful/content-type-id';
+import Layout from '../components/layout/layout';
+import Navbar from '../components/navbar/navbar';
+import Home from '../templates/home/home';
+import StayWithUs from '../templates/stay-with-us/stayWithUs';
+import About from '../templates/about/about';
+import Review from '../templates/reviews/review';
+import Footer from '../templates/footer/footer';
+import Contact from '../templates/contact/contact';
 
 interface IIndexProps {
   navbarSectionProps: INavbarFields[];
@@ -36,13 +34,8 @@ const Index: NextPage<IIndexProps> = ({
 }: IIndexProps) => {
   const [isModalOpen, setModalOpen] = useState<boolean>(false);
 
-  function handleModal() {
-    setModalOpen((modalOpen) => !modalOpen);
-  }
+  const handleModal = useCallback(() => setModalOpen((modalOpen: boolean) => !modalOpen), []);
 
-  function closeModal() {
-    setModalOpen(false);
-  }
 
   return (
     <>
@@ -50,8 +43,7 @@ const Index: NextPage<IIndexProps> = ({
         navbarSectionProps={navbarSectionProps}
         contactSectionProps={contactSectionProps}
         handleModal={handleModal}
-        closeModal={closeModal}
-        isModalOpen={isModalOpen}
+        isModalActive={isModalOpen}
       />
       <Layout>
         <Home homeSectionProps={homeSectionProps}/>

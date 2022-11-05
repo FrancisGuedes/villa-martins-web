@@ -12,9 +12,7 @@ import { getWindowSize, IWindowSize } from '../../utils/utility';
 
 import './navbar.module.scss';
 import tabletSizeWindow from './navbar.module.scss';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTimes } from '@fortawesome/free-solid-svg-icons';
-import SocialMedia, { LabelSocialMedia } from '../social-media/socialMedia';
+import { LabelSocialMedia } from '../social-media/socialMedia';
 import { ContactModule } from '../../lib/interfaces/contentful/icontact';
 import Modal from '../modal/modal';
 import { strings } from '../../utils/strings';
@@ -24,16 +22,14 @@ interface INavbarProps {
   navbarSectionProps: INavbarFields[];
   contactSectionProps: IContactFields[];
   handleModal: () => void;
-  closeModal: () => void;
-  isModalOpen: boolean;
+  isModalActive: boolean;
 }
 
 const Navbar: NextPage<INavbarProps> = ({ 
   navbarSectionProps,
   contactSectionProps,
   handleModal,
-  closeModal,
-  isModalOpen 
+  isModalActive 
 }: INavbarProps) => {
   const [contentfulNavbarData, setContentfulNavbarData] = useState<NavbarModule.INavbar>();
   const [isNavbarActive, setIsNavbarActive] = useState<boolean>(false);
@@ -68,7 +64,7 @@ const Navbar: NextPage<INavbarProps> = ({
 
     handleDomNavbarActivity();
 
-  }, [contentfulNavbarData, lastScrollY, mobileNavOpen, isModalOpen]);
+  }, [contentfulNavbarData, lastScrollY, mobileNavOpen]);
 
   const renderNavlinks: JSX.Element[] = navlinksData.map((navlinkInfo) => {
 
@@ -194,21 +190,20 @@ const Navbar: NextPage<INavbarProps> = ({
       {/* END DESKTOP MENU */}
 
       {/* BEGIN MODAL */}
-      { isModalOpen 
+      { isModalActive 
           ?
             <Modal
               isModalBakgroundActive 
               isSocialMediaActive 
+              classNameSocialMedia={classeSocialMedia}
               socialMediaProps={contactData}
               handleModal={handleModal}
-              closeModal={closeModal}
-              classNameSocialMedia={classeSocialMedia}
             >
               <div className="contact-modal-content">
                 <h1>{labelModalContent.title}</h1>
                 <AppLink 
                   href={`mailto:${labelModalContent.mail}`}
-                  className='mail-text'
+                  className='huge-text'
                 >
                   <span>{labelModalContent.mail}</span>
                 </AppLink>

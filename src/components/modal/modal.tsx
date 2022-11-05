@@ -7,6 +7,7 @@ import { faTimes } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import './modal.module.scss';
 import { createClassName } from '../../utils/utility';
+import { useState, useEffect } from 'react';
 
 interface ModalProps {
   children?: React.ReactNode | React.ReactNode[] | undefined;
@@ -14,9 +15,8 @@ interface ModalProps {
   isModalBakgroundActive: boolean;
   isSocialMediaActive: boolean;
   handleModal: () => void;
-  closeModal: () => void;
   classNameSocialMedia: LabelSocialMedia;
-  id?: string | undefined
+  id?: string | undefined;
 }
 
 type LabelModalSocial = {
@@ -33,36 +33,52 @@ const Modal = ({
   isModalBakgroundActive,
   isSocialMediaActive,
   handleModal,
-  closeModal,
   classNameSocialMedia,
-  id
+  id,
 }: ModalProps) => {
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(true);
+
   const labelModalSocial: LabelModalSocial = {...strings.component.modal.social}
   const labelModal: LabelModal = {...functionalityAlias.component.modal};
   const modalID: string = createClassName(labelModal.id, id);
+
+  function handleIsModalOpen() {
+    setIsModalOpen(false);
+  }
+
+  useEffect(() => {
+    console.log("Activity mounted at ", new Date())
+    // waiting for handleIsModalOpen to make the css effect 
+    // before sending the new state - false - to navbar after closing modal
+    if(!isModalOpen) {
+        setTimeout(() => {
+          handleModal();
+      }, 700)
+    }
+  }, [isModalOpen])
 
   return (
     <>
       { isModalBakgroundActive 
         ? 
           <span 
-            className="modal-background"
-            onClick={() =>
-              closeModal()
-            }
+            className={`modal-background ${isModalOpen ? '' : 'modal-bg-close-effect'}`}
+            onClick={() => {
+              handleIsModalOpen();
+            }}
           />
         : 
           null
       }
       <div 
-        id={modalID}
+        className={`${modalID} ${isModalOpen ? '' : 'modal-close-effect'}`}
         onClick={(event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
-          // modal it will not close if anything inside it's content is clicked
+          // the modal it will not close if anything inside it's content is clicked
           event.stopPropagation();
         }}>
 
           {children}
-          
+
         { isSocialMediaActive 
           ?
             <div className="contact-social">
@@ -84,7 +100,9 @@ const Modal = ({
         }
         <AppLink 
           href='#contact' 
-          onClick={handleModal}
+          onClick={() => {
+            handleIsModalOpen();
+          }}
           className='modal-close'
         >
           <FontAwesomeIcon 

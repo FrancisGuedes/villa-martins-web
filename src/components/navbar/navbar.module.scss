@@ -193,7 +193,6 @@
       }
     }
   };
-  
 }
 
 .close {
@@ -228,17 +227,22 @@
   h1 {
     margin-top: 0;
   }
-  h1, .mail-text {
+  h1, .huge-text {
     font-size: 24px;
     line-height: 50px;
     text-align: center;
   }
-  .mail-text {
-    font-size: 5.5vw;
+  .huge-text {
+    font-size: 4.5vw;
     display: table;
     margin: 0 auto;
     backface-visibility: hidden;
     -webkit-backface-visibility: hidden;
-    -webkit-transform: translateZ(0) scale(1, 1);
+    transform: translateZ(0) scale(1, 1);
+    span {
+      backface-visibility: hidden;
+      -webkit-backface-visibility: hidden;
+      transform: translateZ(0) scale(1, 1);
+    }
   }
 }

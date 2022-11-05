@@ -58,6 +58,7 @@ const SocialMedia = ({
 
     return (
       <> 
+        <span className="top-line"/>
         <div className={`${contactLinkID} ${classes.contactLink}`} key={index}>
           { isTitleOfContactActive 
             ? 

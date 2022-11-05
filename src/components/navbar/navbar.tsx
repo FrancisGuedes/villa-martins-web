@@ -1,28 +1,29 @@
 import { NextPage } from 'next';
 import { useEffect, useState } from 'react';
 import Link from 'next/link'
-
 import { IContactFields, INavbarFields } from '../../../@types/generated/contentful';
 
 import Logo from '../logo/logo';
 import AppLink from '../app-link/appLink';
+import Modal from '../modal/modal';
+import SocialMedia, { LabelSocialMedia } from '../social-media/socialMedia';
 import { NavbarModule } from '../../lib/interfaces/contentful/inavbar';
 import { LogoModule } from '../../lib/interfaces/contentful/ilogo';
+import { ContactModule } from '../../lib/interfaces/contentful/icontact';
 import { getWindowSize, IWindowSize } from '../../utils/utility';
+import { strings } from '../../utils/strings';
 
 import './navbar.module.scss';
 import tabletSizeWindow from './navbar.module.scss';
-import { LabelSocialMedia } from '../social-media/socialMedia';
-import { ContactModule } from '../../lib/interfaces/contentful/icontact';
-import Modal from '../modal/modal';
-import { strings } from '../../utils/strings';
-
-
 interface INavbarProps {
   navbarSectionProps: INavbarFields[];
   contactSectionProps: IContactFields[];
   handleModal: () => void;
   isModalActive: boolean;
+}
+
+type LabelMobileSocial = {
+  title: string;
 }
 
 const Navbar: NextPage<INavbarProps> = ({ 
@@ -143,9 +144,17 @@ const Navbar: NextPage<INavbarProps> = ({
     contactLink: "modal-contact-link", 
     link: "modal-link", 
     svgIcon: "modal-svg-icon"
-  }
+  };
 
-  const labelModalContent = {...strings.component.navbar.modalContent}
+  const classeMobileSocialMedia: LabelSocialMedia = {
+    contactLink: "mobile-contact-link", 
+    link: "mobile-link", 
+    svgIcon: "mobile-svg-icon"
+  };
+
+  const labelModalContent = {...strings.component.navbar.modalContent};
+
+  const labelMobileSocial: LabelMobileSocial = {...strings.component.navbar.social};
 
   return (
     <header className={`header-navbar-active ${isNavbarActive ? 'hidden' : ''}`}>
@@ -177,6 +186,22 @@ const Navbar: NextPage<INavbarProps> = ({
           <ul className="mobile-navlink-content">
             {renderNavlinks}
           </ul>
+          <div className='social-media-mobile'>
+            <h3>
+              {labelMobileSocial.title}
+            </h3>
+            <div className="social-list">
+              <SocialMedia 
+                socialMediaProps={contactData} 
+                isTitleOfContactActive={false} 
+                isSvgActive 
+                isDescriptionSvgActive={false}
+                className={classeMobileSocialMedia}
+                svgWidth={16}
+                svgHeight={16}
+              />
+            </div>
+          </div>
         </div>
       </span>
       {/* END MOBILE MENU */}
@@ -198,6 +223,8 @@ const Navbar: NextPage<INavbarProps> = ({
               classNameSocialMedia={classeSocialMedia}
               socialMediaProps={contactData}
               handleModal={handleModal}
+              svgWidthForSocial={16}
+              svgHeightForSocial={16}
             >
               <div className="contact-modal-content">
                 <h1>{labelModalContent.title}</h1>

@@ -17,9 +17,11 @@ interface ModalProps {
   handleModal: () => void;
   classNameSocialMedia: LabelSocialMedia;
   id?: string | undefined;
+  svgHeightForSocial: number;
+  svgWidthForSocial: number;
 }
 
-type LabelModalSocial = {
+export type LabelModalSocial = {
   title: string;
 }
 
@@ -35,6 +37,8 @@ const Modal = ({
   handleModal,
   classNameSocialMedia,
   id,
+  svgHeightForSocial,
+  svgWidthForSocial
 }: ModalProps) => {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(true);
 
@@ -47,9 +51,8 @@ const Modal = ({
   }
 
   useEffect(() => {
-    console.log("Activity mounted at ", new Date())
-    // waiting for handleIsModalOpen to make the css effect 
-    // before sending the new state - false - to navbar after closing modal
+    // Waiting for handleIsModalOpen to make the css effect 
+    // before sending the updated state - false - to navbar after closing modal
     if(!isModalOpen) {
         setTimeout(() => {
           handleModal();
@@ -92,6 +95,8 @@ const Modal = ({
                   isSvgActive 
                   isDescriptionSvgActive={false}
                   className={classNameSocialMedia}
+                  svgHeight={svgHeightForSocial}
+                  svgWidth={svgWidthForSocial}
                 />
               </div>
             </div>

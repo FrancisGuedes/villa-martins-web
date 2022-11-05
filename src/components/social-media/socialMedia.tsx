@@ -11,6 +11,8 @@ interface SocialMediaProps {
   isSvgActive: boolean;
   isDescriptionSvgActive: boolean;
   className?: LabelSocialMedia | undefined;
+  svgHeight: number;
+  svgWidth: number;
 }
 
 export type LabelSocialMedia = {
@@ -25,7 +27,9 @@ const SocialMedia = ({
   isSvgActive,
   isDescriptionSvgActive,
   isTitleOfContactActive,
-  className
+  className,
+  svgHeight,
+  svgWidth
 }: SocialMediaProps) => {
   const labelSocialMedia: LabelSocialMedia = {...functionalityAlias.component.socialMedia};
   const classes: LabelSocialMedia = combineObjects(labelSocialMedia, className);
@@ -50,6 +54,8 @@ const SocialMedia = ({
               isSvgActive={isSvgActive}
               isDescriptionSvgActive={isDescriptionSvgActive}
               className={classes}
+              svgWidth={svgWidth}
+              svgHeight={svgHeight}
             />
           </div>
         </>

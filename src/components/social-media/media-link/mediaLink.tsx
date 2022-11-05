@@ -14,6 +14,8 @@ interface MediaLinkProps {
   isSvgActive: boolean;
   isDescriptionSvgActive: boolean;
   className?: LabelSocialMedia | undefined;
+  svgHeight?: number | undefined;
+  svgWidth?: number | undefined;
 }
 
 const MediaLink = ({
@@ -22,7 +24,9 @@ const MediaLink = ({
   svgClassName,
   isSvgActive,
   isDescriptionSvgActive,
-  className
+  className,
+  svgHeight,
+  svgWidth
 }: MediaLinkProps) => {
   const svgUrl: string = concatHttpsAndUrlFromContentful(linkMediaFile.url);
   
@@ -37,8 +41,8 @@ const MediaLink = ({
           ? 
             <Image 
               src={svgUrl} 
-              height={20}
-              width={20}
+              height={svgHeight ? svgHeight : 16 }
+              width={svgWidth ? svgWidth : 16}
               className={`${svgClassName} ${className?.svgIcon}`}
             /> 
           : 

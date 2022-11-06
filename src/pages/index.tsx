@@ -36,7 +36,6 @@ const Index: NextPage<IIndexProps> = ({
 
   const handleModal = useCallback(() => setModalOpen((modalOpen: boolean) => !modalOpen), []);
 
-
   return (
     <>
       <Navbar 

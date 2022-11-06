@@ -1,12 +1,12 @@
 import { NextPage } from 'next';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import Link from 'next/link'
 import { IContactFields, INavbarFields } from '../../../@types/generated/contentful';
 
 import Logo from '../logo/logo';
 import AppLink from '../app-link/appLink';
 import Modal from '../modal/modal';
-import SocialMedia, { LabelSocialMedia } from '../social-media/socialMedia';
+import { LabelSocialMedia } from '../social-media/socialMedia';
 import { NavbarModule } from '../../lib/interfaces/contentful/inavbar';
 import { LogoModule } from '../../lib/interfaces/contentful/ilogo';
 import { ContactModule } from '../../lib/interfaces/contentful/icontact';
@@ -15,15 +15,14 @@ import { strings } from '../../utils/strings';
 
 import './navbar.module.scss';
 import tabletSizeWindow from './navbar.module.scss';
+import MobileMenu from './mobile-menu/mobileMenu';
+import DesktopMenu from './desktop-menu/desktopMenu';
+
 interface INavbarProps {
   navbarSectionProps: INavbarFields[];
   contactSectionProps: IContactFields[];
   handleModal: () => void;
   isModalActive: boolean;
-}
-
-type LabelMobileSocial = {
-  title: string;
 }
 
 const Navbar: NextPage<INavbarProps> = ({ 
@@ -77,7 +76,7 @@ const Navbar: NextPage<INavbarProps> = ({
             href={`#${navlinkInfo.fields.href}`}
           >
               <a onClick={() => {
-                  windowWidth! <= windowWidthTablet ? menuToggle() : '';
+                  windowWidth! <= windowWidthTablet ? handleMenuToggle() : '';
                   // Modal will be triggered only on contact navlink
                   if(navlinkInfo.fields.href === 'contact') {
                     handleModal();
@@ -104,9 +103,7 @@ const Navbar: NextPage<INavbarProps> = ({
     }
   };
 
-  const menuToggle = (): void => {
-    setMobileNavOpen((mobileNavOpen) => !mobileNavOpen);
-  };
+  const handleMenuToggle = useCallback(() => setMobileNavOpen((mobileNavOpen: boolean) => !mobileNavOpen), []);
 
   const toggleBodyOverflow = (): void => {
     mobileNavOpen ? document.body.style.overflow = 'hidden' : document.body.style.overflow = 'scroll';
@@ -146,15 +143,7 @@ const Navbar: NextPage<INavbarProps> = ({
     svgIcon: "modal-svg-icon"
   };
 
-  const classeMobileSocialMedia: LabelSocialMedia = {
-    contactLink: "mobile-contact-link", 
-    link: "mobile-link", 
-    svgIcon: "mobile-svg-icon"
-  };
-
   const labelModalContent = {...strings.component.navbar.modalContent};
-
-  const labelMobileSocial: LabelMobileSocial = {...strings.component.navbar.social};
 
   return (
     <header className={`header-navbar-active ${isNavbarActive ? 'hidden' : ''}`}>
@@ -164,56 +153,16 @@ const Navbar: NextPage<INavbarProps> = ({
         height={150} 
         className='navbar-logo'
       />
-
-      {/* BEGIN MOBILE MENU */}
-      <span className="toggle-menu-wrapper">
-        <button
-          type='button'
-          className='menu-button'
-          onClick={() => {
-            menuToggle();
-          }}
-          aria-label={contentfulNavbarData?.name}
-        >
-          <div
-            className={`bar-parallel-one ${mobileNavOpen ? 'bar-crossed-one' : ''}`}
-          />
-          <div
-            className={`bar-parallel-two ${mobileNavOpen ? 'bar-crossed-two' : ''}`}
-          />
-        </button>
-        <div className={`mobile-menu-open ${mobileNavOpen ? '' : 'close'}`}>
-          <ul className="mobile-navlink-content">
-            {renderNavlinks}
-          </ul>
-          <div className='social-media-mobile'>
-            <h3>
-              {labelMobileSocial.title}
-            </h3>
-            <div className="social-list">
-              <SocialMedia 
-                socialMediaProps={contactData} 
-                isTitleOfContactActive={false} 
-                isSvgActive 
-                isDescriptionSvgActive={false}
-                className={classeMobileSocialMedia}
-                svgWidth={16}
-                svgHeight={16}
-              />
-            </div>
-          </div>
-        </div>
-      </span>
-      {/* END MOBILE MENU */}
-
-      {/* BEGIN DESKTOP MENU */}
-      <nav className='navlink-wrapper'>
-        <ul className="navlink-content">
-          {renderNavlinks}
-        </ul>
-      </nav>
-      {/* END DESKTOP MENU */}
-
+      <MobileMenu 
+        menuToggle={handleMenuToggle} 
+        ariaLabel={contentfulNavbarData?.name} 
+        renderNavlinks={renderNavlinks} 
+        contactData={contactData} 
+        isMobileMenuOpen={mobileNavOpen}
+      />
+      <DesktopMenu 
+        renderNavlinks={renderNavlinks} 
+      />
       {/* BEGIN MODAL */}
       { isModalActive 
           ?

@@ -1,0 +1,24 @@
+@use '../../../styles/core/fonts';
+@use '../../../styles/core/mediaQueries';
+
+.navlink-wrapper {
+  width: 500px;
+  transition: top 1.5s ease-in-out;
+  @include mediaQueries.maxWidthtablet {
+    display: none
+  };
+  @include mediaQueries.tablet {
+    display: none
+  };
+  @include mediaQueries.minWidthBigDesktops {
+    width: 650px;
+  };
+  .navlink-content {
+    display: flex;
+    justify-content: space-between;
+    align-content: center;
+    li {
+      font-weight: fonts.$font-medium;
+    }
+  }
+}

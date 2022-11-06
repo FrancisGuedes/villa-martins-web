@@ -1,4 +1,6 @@
 @use '../components/navbar/navbar.module.scss';
+@use '../components/navbar/mobile-menu/mobileMenu.module.scss';
+@use '../components/navbar/desktop-menu/desktopMenu.module.scss';
 
 @use '../components/app-button/appButton.module.scss';
 

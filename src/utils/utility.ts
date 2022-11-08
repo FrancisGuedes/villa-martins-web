@@ -57,8 +57,8 @@ export function combineObjects<T extends LabelCarouselSlideTextClassName | Label
     }
 }
 
-
 export const useScrollPosition = () => {
+  // this will track a value and updated it
   const [scrollPosition, setScrollPosition] = useState<number>(0);
 
   useEffect(() => {
@@ -66,11 +66,11 @@ export const useScrollPosition = () => {
         const updatePosition = () => {
         setScrollPosition(window.pageYOffset)
       }
-    
+      //accounts for the scroll position when the component first mounts
       window.addEventListener('scroll', updatePosition)
 
       updatePosition()
-
+      // cleanup function that removes the event listener when the component unmounts
       return () => window.removeEventListener('scroll', updatePosition)
     }
   }, [])

@@ -1,6 +1,7 @@
 @use '../../styles/core/colors';
 @use '../../styles/core/fonts';
 @use '../../styles/core/mediaQueries';
+@use '../../styles/core/animations';
 
 :export {
   tabletSizeWindow: 970px;
@@ -17,11 +18,9 @@
   height: 80px;
   width: 100%;
   background-color: colors.$mainBackground;
-  transition: all 1.5s ease-in-out;
   z-index: 1;
-  -webkit-transition: 0.29s cubic-bezier(0.52, 0.01, 0.16, 1);
-  -moz-transition: 0.29s cubic-bezier(0.52, 0.01, 0.16, 1);
-  transition: 0.29s cubic-bezier(0.52, 0.01, 0.16, 1);
+  @include animations.headingDown;
+  @include animations.animate(headingDown, 0.3s, 0s, cubic-bezier(0.52, 0.01, 0.16, 1), forwards);
   @include mediaQueries.minWidthBigDesktops {
     padding: 0 15% 0 15%;
   };
@@ -30,9 +29,8 @@
 .hidden {
   position: fixed;
   top: -80px;
-  -webkit-transition: 0.29s cubic-bezier(0.52, 0.01, 0.16, 1);
-  -moz-transition: 0.29s cubic-bezier(0.52, 0.01, 0.16, 1);
-  transition: 0.29s cubic-bezier(0.52, 0.01, 0.16, 1);
+  @include animations.headingUp;
+  @include animations.animate(headingUp, 0.3s, 0s, cubic-bezier(0.52, 0.01, 0.16, 1), forwards);
 }
 
 .contact-modal-content {

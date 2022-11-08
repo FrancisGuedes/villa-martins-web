@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import { LabelCarouselClassName, LabelCarouselSlideTextClassName } from "../components/carousel/carousel";
 import { LabelSocialMedia } from "../components/social-media/socialMedia";
 import { HTTPS } from "../lib/endpoints";
@@ -54,4 +55,25 @@ export function combineObjects<T extends LabelCarouselSlideTextClassName | Label
     } else {
       return defaultClass;
     }
+}
+
+
+export const useScrollPosition = () => {
+  const [scrollPosition, setScrollPosition] = useState<number>(0);
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+        const updatePosition = () => {
+        setScrollPosition(window.pageYOffset)
+      }
+    
+      window.addEventListener('scroll', updatePosition)
+
+      updatePosition()
+
+      return () => window.removeEventListener('scroll', updatePosition)
+    }
+  }, [])
+
+  return scrollPosition;
 }

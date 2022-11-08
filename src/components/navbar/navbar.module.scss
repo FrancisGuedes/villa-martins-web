@@ -33,6 +33,10 @@
   @include animations.animate(headingUp, 0.3s, 0s, cubic-bezier(0.52, 0.01, 0.16, 1), forwards);
 }
 
+.shadow {
+  box-shadow: rgba(60, 64, 67, 0.3) 0px 0px 1px 0px;//-1px 0px 1px 0px;
+}
+
 .contact-modal-content {
   position: absolute;
   top: 0;

@@ -1,6 +1,7 @@
 @use '../../../styles/core/colors';
 @use '../../../styles/core/fonts';
 @use '../../../styles/core/mediaQueries';
+@use '../../../styles/core/animations';
 
 .toggle-menu-wrapper {
   @include mediaQueries.minWidthdesktop {
@@ -17,7 +18,6 @@
     background: transparent;
     border: none;
     padding: 0;
-    transition: opacity .32s .4s;
     &:focus {
       outline: none;
     }
@@ -74,15 +74,22 @@
     right: 0;
     bottom: 0;
     background-color: colors.$mainBackground;
-    -webkit-transition: 0.55s cubic-bezier(0.52, 0.01, 0.16, 1);
-    -moz-transition: 0.55s cubic-bezier(0.52, 0.01, 0.16, 1);
-    transition: 0.55s cubic-bezier(0.52, 0.01, 0.16, 1);
     z-index: 220;
+    opacity: 1;
+    visibility: visible;
+    @include animations.opacityIn;
+    @include animations.animate(opacityIn, 0.65s, cubic-bezier(0.165, 0.840, 0.440, 1.000), forwards);
+    &.close {
+      opacity: 0;
+      visibility: hidden;
+      display: none;
+      @include animations.opacityOut;
+      @include animations.animate(opacityOut, 0.65s, cubic-bezier(0.165, 0.840, 0.440, 1.000), forwards);
+    }
     .mobile-navlink-content {
       font-size: 20px;
       text-transform: uppercase;
       letter-spacing: 1.5px;
-      transition: 0.55s cubic-bezier(0.52, 0.01, 0.16, 1);
       height: 80%;
       width: 100%;
       position: absolute;
@@ -133,6 +140,13 @@
         -ms-flex-pack: center;
         align-items: center;
         font-size: 16px;
+        @include animations.fadeInUp;
+        @include animations.animate(fadeInUp, 1s, cubic-bezier(0.165, 0.840, 0.440, 1.000), forwards);
+        @for $i from 2 through 5 {
+          &:nth-child(#{$i}) {
+            animation-delay: $i*0.1s;
+          }
+        }
       }
     }
     .social-media-mobile {
@@ -140,7 +154,6 @@
       bottom: 0;
       position: absolute;
       text-align: center;
-      transition: 0.55s cubic-bezier(0.52, 0.01, 0.16, 1) 0.4s;
       height: 20%;
       h3 {
         margin-bottom: 0;
@@ -177,8 +190,4 @@
       }
     }
   };
-}
-
-.close {
-  display: none;
 }

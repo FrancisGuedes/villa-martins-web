@@ -1,5 +1,5 @@
-@mixin animate($animation, $duration, $method, $times) {
-  animation: $animation $duration $method $times;
+@mixin animate($animationName, $duration, $delay, $method, $times) {
+  animation: $animationName $duration $delay $method $times;
 }
 
 @mixin opacityIn {
@@ -47,3 +47,52 @@
   }
 }
 
+@mixin zoomIn {
+  @keyframes zoomIn {
+    0% {
+      transform:scale(0);
+    }
+    100% {
+      transform:scale(1);
+    }
+  }
+}
+
+@mixin zoomOut {
+  @keyframes zoomOut {
+    0% {
+      transform:scale(1);
+    }
+    100% {
+      transform:scale(0);
+    }
+  }
+}
+
+@mixin unfoldIn {
+  @keyframes unfoldIn {
+  0% {
+    transform:scaleY(.005) scaleX(0);
+  }
+  50% {
+    transform:scaleY(.005) scaleX(1);
+  }
+  100% {
+    transform:scaleY(1) scaleX(1);
+  }
+}
+}
+
+@mixin unfoldOut {
+  @keyframes unfoldOut {
+    0% {
+      transform:scaleY(1) scaleX(1);
+    }
+    50% {
+      transform:scaleY(.005) scaleX(1);
+    }
+    100% {
+      transform:scaleY(.005) scaleX(0);
+    }
+  }
+}

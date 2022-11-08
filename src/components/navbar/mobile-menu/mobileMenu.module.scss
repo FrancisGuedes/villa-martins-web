@@ -78,13 +78,13 @@
     opacity: 1;
     visibility: visible;
     @include animations.opacityIn;
-    @include animations.animate(opacityIn, 0.65s, cubic-bezier(0.165, 0.840, 0.440, 1.000), forwards);
+    @include animations.animate(opacityIn, 0.65s, 0s, cubic-bezier(0.165, 0.840, 0.440, 1.000), forwards);
     &.close {
       opacity: 0;
       visibility: hidden;
       display: none;
       @include animations.opacityOut;
-      @include animations.animate(opacityOut, 0.65s, cubic-bezier(0.165, 0.840, 0.440, 1.000), forwards);
+      @include animations.animate(opacityOut, 0.65s, 0s, cubic-bezier(0.165, 0.840, 0.440, 1.000), forwards);
     }
     .mobile-navlink-content {
       font-size: 20px;
@@ -141,7 +141,7 @@
         align-items: center;
         font-size: 16px;
         @include animations.fadeInUp;
-        @include animations.animate(fadeInUp, 1s, cubic-bezier(0.165, 0.840, 0.440, 1.000), forwards);
+        @include animations.animate(fadeInUp, 1s, 0s, cubic-bezier(0.165, 0.840, 0.440, 1.000), forwards);
         @for $i from 2 through 5 {
           &:nth-child(#{$i}) {
             animation-delay: $i*0.1s;

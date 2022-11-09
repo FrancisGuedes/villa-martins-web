@@ -10,7 +10,7 @@ import { LabelSocialMedia } from '../social-media/socialMedia';
 import { NavbarModule } from '../../lib/interfaces/contentful/inavbar';
 import { LogoModule } from '../../lib/interfaces/contentful/ilogo';
 import { ContactModule } from '../../lib/interfaces/contentful/icontact';
-import { getWindowSize, IWindowSize, useScrollPosition } from '../../utils/utility';
+import { getWindowSize, IWindowSize, useScrollYPosition } from '../../utils/utility';
 import { strings } from '../../utils/strings';
 
 import './navbar.module.scss';
@@ -36,7 +36,7 @@ const Navbar: NextPage<INavbarProps> = ({
   const [lastScrollY, setLastScrollY] = useState<number>(0);
   const [mobileNavOpen, setMobileNavOpen] = useState<boolean>(false);
   const [windowSize, setWindowSize] = useState<IWindowSize | undefined>(getWindowSize());
-  const scrollPosition = useScrollPosition();
+  const scrollYPosition = useScrollYPosition();
   
   const windowWidthTablet: number = +tabletSizeWindow.tabletSizeWindow.slice(0, 3);
   const windowWidth: number | undefined = windowSize?.innerWidth;
@@ -148,7 +148,7 @@ const Navbar: NextPage<INavbarProps> = ({
   const labelModalContent = {...strings.component.navbar.modalContent};
 
   return (
-    <header className={`header-navbar-active ${isNavbarActive ? 'hidden' : ''} ${scrollPosition > 0 ? 'shadow' : ''}`}>
+    <header className={`header-navbar-active ${isNavbarActive ? 'hidden' : ''} ${scrollYPosition > 0 ? 'shadow' : ''}`}>
       <Logo 
         logoImageProps={logoData} 
         width={150} 

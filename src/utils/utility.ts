@@ -57,7 +57,7 @@ export function combineObjects<T extends LabelCarouselSlideTextClassName | Label
     }
 }
 
-export const useScrollPosition = () => {
+export const useScrollYPosition = () => {
   // this will track a value and updated it
   const [scrollPosition, setScrollPosition] = useState<number>(0);
 

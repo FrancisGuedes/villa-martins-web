@@ -11,6 +11,8 @@
   }
   @include mediaQueries.tablet {
     padding: vars.$footerPaddingTablet;
+    height: 65vh;
+    min-height: 650px;
   };
   @include mediaQueries.maxWidthMobile {
     padding: vars.$footerMaxWidthMobile;

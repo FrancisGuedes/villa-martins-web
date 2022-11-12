@@ -1,4 +1,3 @@
-import { LegacyRef } from 'react';
 import { IContactFields } from '../../../@types/generated/contentful';
 import SocialMedia from '../../components/social-media/socialMedia';
 
@@ -8,7 +7,7 @@ import './contact.module.scss';
 
 interface ContactProps {
   contactSectionProps: IContactFields[];
-  contactRef: LegacyRef<HTMLElement> | undefined;
+  contactRef: any;
 }
 
 const Contact = ({

@@ -1,5 +1,5 @@
 import { NextPage } from 'next';
-import { LegacyRef, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import { IHomeFields } from '../../../@types/generated/contentful';
 import AppButton from '../../components/app-button/appButton';
@@ -11,7 +11,7 @@ import './home.module.scss';
 
 interface IHomeProps {
   homeSectionProps: IHomeFields[];
-  homeRef: LegacyRef<HTMLElement> | undefined;
+  homeRef: any;
 }
 
 const Home: NextPage<IHomeProps>  = ({ 

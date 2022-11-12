@@ -10,7 +10,7 @@ import './stayWithUs.module.scss';
 
 interface IStayWithUsProps {
   stayWithUsSectionProps: IStayWithUsFields[];
-  stayWithUsRef: LegacyRef<HTMLElement> | undefined;
+  stayWithUsRef: any;
 }
 
 const StayWithUs: NextPage<IStayWithUsProps> = ({

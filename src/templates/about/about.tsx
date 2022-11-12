@@ -10,7 +10,7 @@ import './about.module.scss';
 
 interface AboutProps {
   aboutSectionProps: IAboutFields[];
-  aboutRef: LegacyRef<HTMLElement> | undefined;
+  aboutRef: any;
 }
 
 const About = ({

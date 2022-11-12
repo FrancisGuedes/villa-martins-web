@@ -1,4 +1,3 @@
-import { LegacyRef } from 'react';
 import { IReviewFields } from '../../../@types/generated/contentful';
 import Carousel, { LabelCarouselClassName } from '../../components/carousel/carousel';
 import { ReviewModule } from '../../lib/interfaces/contentful/ireview';
@@ -7,7 +6,7 @@ import './review.module.scss';
 
 interface reviewProps {
   reviewSectionProps: IReviewFields[];
-  reviewRef: LegacyRef<HTMLElement> | undefined;
+  reviewRef: any;
 }
 
 const Review = ({

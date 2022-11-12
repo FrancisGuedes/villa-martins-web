@@ -1,12 +1,12 @@
 import { IAboutFields } from '../../../@types/generated/contentful';
 
+import { LegacyRef } from 'react';
 import AppButton from '../../components/app-button/appButton';
 import { AboutImageContentModule, AboutModule } from '../../lib/interfaces/contentful/iabout';
 import { concatHttpsAndUrlFromContentful } from '../../utils/utility';
 import Ameneties from './ameneties/ameneties';
 
 import './about.module.scss';
-import { LegacyRef } from 'react';
 
 interface AboutProps {
   aboutSectionProps: IAboutFields[];

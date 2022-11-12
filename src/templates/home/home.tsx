@@ -39,7 +39,7 @@ const Home: NextPage<IHomeProps>  = ({
 
   return (
     <>
-      <section id="home" className='home-wrapper' ref={homeRef}>
+      <section id="#" className='home-wrapper' ref={homeRef}>
         <div className='carousel-wrapper'>
           <Carousel
             slides={carouselMedia}

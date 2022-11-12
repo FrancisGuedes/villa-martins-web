@@ -37,6 +37,26 @@
   box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 1px 0px;//-1px 0px 1px 0px;
 }
 
+.underline {
+  color: colors.$navlinkNotActive;
+}
+
+.active, .not-active:hover {
+  background: linear-gradient(0deg, colors.$black, colors.$black) no-repeat right bottom / 0 100%;
+  color: colors.$black;
+  transition: background-size 500ms;
+  background-size: 100% 7%;
+  background-position-x: left;
+  padding-bottom: 3px;
+}
+
+@include mediaQueries.tablet {
+    .not-active:hover {
+      background: none;
+      color: colors.$navlinkNotActive;
+    }
+}
+
 .contact-modal-content {
   position: absolute;
   top: 0;

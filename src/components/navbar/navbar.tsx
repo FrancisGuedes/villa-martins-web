@@ -12,31 +12,37 @@ import { LogoModule } from '../../lib/interfaces/contentful/ilogo';
 import { ContactModule } from '../../lib/interfaces/contentful/icontact';
 import { getWindowSize, IWindowSize, useScrollYPosition } from '../../utils/utility';
 import { strings } from '../../utils/strings';
-
-import './navbar.module.scss';
-import tabletSizeWindow from './navbar.module.scss';
 import MobileMenu from './mobile-menu/mobileMenu';
 import DesktopMenu from './desktop-menu/desktopMenu';
+import { NavSectionRefs } from '../../pages';
+
+
+import tabletSizeWindow from './navbar.module.scss';
+import './navbar.module.scss';
 
 interface INavbarProps {
   navbarSectionProps: INavbarFields[];
   contactSectionProps: IContactFields[];
   handleModal: () => void;
   isModalActive: boolean;
+  navSectionRefs: NavSectionRefs[];
 }
 
 const Navbar: NextPage<INavbarProps> = ({ 
   navbarSectionProps,
   contactSectionProps,
   handleModal,
-  isModalActive 
+  isModalActive,
+  navSectionRefs
 }: INavbarProps) => {
   const [contentfulNavbarData, setContentfulNavbarData] = useState<NavbarModule.INavbar>();
   const [isNavbarActive, setIsNavbarActive] = useState<boolean>(false);
   const [lastScrollY, setLastScrollY] = useState<number>(0);
   const [mobileNavOpen, setMobileNavOpen] = useState<boolean>(false);
   const [windowSize, setWindowSize] = useState<IWindowSize | undefined>(getWindowSize());
-  const scrollYPosition = useScrollYPosition();
+  const [activeNavLink, setActiveNavLink] = useState<number>(0);
+  
+  const scrollYPosition: number = useScrollYPosition();
   
   const windowWidthTablet: number = +tabletSizeWindow.tabletSizeWindow.slice(0, 3);
   const windowWidth: number | undefined = windowSize?.innerWidth;
@@ -65,9 +71,74 @@ const Navbar: NextPage<INavbarProps> = ({
 
     handleDomNavbarActivity();
 
-  }, [contentfulNavbarData, lastScrollY, mobileNavOpen]);
+    // for handling active navlink
+    document.addEventListener("scroll", handleScrollActiveLink);
+    return () => {
+      document.removeEventListener("scroll", handleScrollActiveLink);
+    };
+  }, [lastScrollY]);
 
-  const renderNavlinks: JSX.Element[] = navlinksData.map((navlinkInfo) => {
+  const nearestIndex = (
+    currentPosition: number,
+    sectionPositionArray: any,
+    startIndex: number,
+    endIndex: number
+  ): number => {
+    if(sectionPositionArray !== null) {
+      if (startIndex === endIndex) return startIndex;
+      else if (startIndex === endIndex - 1) {
+        if (
+          Math.abs(
+            sectionPositionArray[startIndex].headerRef.current.offsetTop -
+              currentPosition
+          ) <
+          Math.abs(
+            sectionPositionArray[endIndex].headerRef.current.offsetTop -
+              currentPosition
+          )
+        )
+          return startIndex;
+        else return endIndex;
+      } else {
+        const nextNearest = ~~((startIndex + endIndex) / 2);
+        const a = Math.abs(
+          sectionPositionArray[nextNearest].headerRef.current.offsetTop -
+            currentPosition
+        );
+        const b = Math.abs(
+          sectionPositionArray[nextNearest + 1].headerRef.current.offsetTop -
+            currentPosition
+        );
+        if (a < b) {
+          return nearestIndex(
+            currentPosition,
+            sectionPositionArray,
+            startIndex,
+            nextNearest
+          );
+        } else {
+          return nearestIndex(
+            currentPosition,
+            sectionPositionArray,
+            nextNearest,
+            endIndex
+          );
+        }
+      }
+    } else return 0;
+  };
+
+  const handleScrollActiveLink = () => {
+    var index: number = nearestIndex(
+      window.scrollY,
+      navSectionRefs,
+      0,
+      navSectionRefs.length - 1
+    );
+    setActiveNavLink(index);
+  };
+
+  const renderNavlinks: JSX.Element[] = navlinksData.map((navlinkInfo: NavbarModule.INavlink, index: number) => {
 
     return (
         <li className={`${navlinkInfo.fields.name}-title`} key={navlinkInfo.sys.id}>
@@ -83,6 +154,7 @@ const Navbar: NextPage<INavbarProps> = ({
                     handleModal();
                   };
                 }}
+                className={`underline ${activeNavLink === index ? "active" : "not-active"}`}
               >
                   {navlinkInfo.fields.title}
               </a>
@@ -166,7 +238,7 @@ const Navbar: NextPage<INavbarProps> = ({
         renderNavlinks={renderNavlinks} 
       />
       {/* BEGIN MODAL */}
-      { isModalActive 
+      { isModalActive
           ?
             <Modal
               isModalBakgroundActive 

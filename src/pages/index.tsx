@@ -1,5 +1,5 @@
 import type { NextPage, GetStaticProps, GetStaticPaths, GetServerSideProps } from 'next';
-import { useCallback, useEffect, useState } from 'react';
+import { RefObject, useCallback, useRef, useState } from 'react';
 import { IAboutFields, IContactFields, IHomeFields, INavbarFields, IReviewFields, IStayWithUsFields, IFooterFields } from '../../@types/generated/contentful';
 
 import ContentService from '../utils/contentful/content-service';
@@ -23,6 +23,10 @@ interface IIndexProps {
   footerSectionProps: IFooterFields[];
 }
 
+export type NavSectionRefs = {
+  headerRef: RefObject<number>;
+}
+
 const Index: NextPage<IIndexProps> = ({
   navbarSectionProps, 
   homeSectionProps,
@@ -36,6 +40,20 @@ const Index: NextPage<IIndexProps> = ({
 
   const handleModal = useCallback(() => setModalOpen((modalOpen: boolean) => !modalOpen), []);
 
+  const homeRef = useRef<number>() as RefObject<number>;
+  const stayWithUsRef = useRef() as RefObject<number>;
+  const aboutRef = useRef() as RefObject<number>;
+  const reviewRef = useRef() as RefObject<number>;
+  const contactRef = useRef() as RefObject<number>;
+
+  const navSectionRefs = [
+    { headerRef: homeRef },
+    { headerRef: stayWithUsRef },
+    { headerRef: aboutRef },
+    { headerRef: reviewRef },
+    { headerRef: contactRef },
+  ];
+  
   return (
     <>
       <Navbar 
@@ -43,14 +61,30 @@ const Index: NextPage<IIndexProps> = ({
         contactSectionProps={contactSectionProps}
         handleModal={handleModal}
         isModalActive={isModalOpen}
+        navSectionRefs={navSectionRefs}
       />
       <Layout>
-        <Home homeSectionProps={homeSectionProps}/>
-        <StayWithUs stayWithUsSectionProps={stayWithUsSectionProps}/>
-        <About aboutSectionProps={aboutSectionProps}/>
-        <Review reviewSectionProps={reviewSectionProps}/>
+        <Home 
+          homeSectionProps={homeSectionProps} 
+          homeRef={homeRef}
+        />
+        <StayWithUs 
+          stayWithUsSectionProps={stayWithUsSectionProps} 
+          stayWithUsRef={stayWithUsRef}
+        />
+        <About 
+          aboutSectionProps={aboutSectionProps} 
+          aboutRef={aboutRef}
+        />
+        <Review 
+          reviewSectionProps={reviewSectionProps} 
+          reviewRef={reviewRef}
+        />
       </Layout>
-      <Contact contactSectionProps={contactSectionProps}/>
+      <Contact 
+        contactSectionProps={contactSectionProps}
+        contactRef={contactRef}
+      />
       <Footer footerSectionProps={footerSectionProps} />
     </>
   )

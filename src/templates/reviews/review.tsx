@@ -1,3 +1,4 @@
+import { LegacyRef } from 'react';
 import { IReviewFields } from '../../../@types/generated/contentful';
 import Carousel, { LabelCarouselClassName } from '../../components/carousel/carousel';
 import { ReviewModule } from '../../lib/interfaces/contentful/ireview';
@@ -6,10 +7,12 @@ import './review.module.scss';
 
 interface reviewProps {
   reviewSectionProps: IReviewFields[];
+  reviewRef: LegacyRef<HTMLElement> | undefined;
 }
 
 const Review = ({
-  reviewSectionProps
+  reviewSectionProps,
+  reviewRef
 }: reviewProps) => {
   const reviewData: ReviewModule.IReview = new Map(Object.entries(reviewSectionProps))
   .values()
@@ -30,7 +33,7 @@ const Review = ({
 
   return (
     <>
-      <section id="reviews" className='review-wrapper'>
+      <section id="reviews" className='review-wrapper' ref={reviewRef}>
         <div className='title-wrapper'>
           <h1>
             {title}

@@ -1,5 +1,5 @@
 import { NextPage } from 'next';
-import { useEffect, useState } from 'react';
+import { LegacyRef, useEffect, useState } from 'react';
 
 import { IHomeFields } from '../../../@types/generated/contentful';
 import AppButton from '../../components/app-button/appButton';
@@ -11,10 +11,12 @@ import './home.module.scss';
 
 interface IHomeProps {
   homeSectionProps: IHomeFields[];
+  homeRef: LegacyRef<HTMLElement> | undefined;
 }
 
 const Home: NextPage<IHomeProps>  = ({ 
-  homeSectionProps 
+  homeSectionProps ,
+  homeRef
 }: IHomeProps) => {
   const [contentfulHomeData, setContentfulHomeData] = useState<Array<IHomeFields>>([]);
   
@@ -37,7 +39,7 @@ const Home: NextPage<IHomeProps>  = ({
 
   return (
     <>
-      <section id="home" className='home-wrapper'>
+      <section id="home" className='home-wrapper' ref={homeRef}>
         <div className='carousel-wrapper'>
           <Carousel
             slides={carouselMedia}

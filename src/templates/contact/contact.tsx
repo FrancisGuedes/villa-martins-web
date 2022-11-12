@@ -1,3 +1,4 @@
+import { LegacyRef } from 'react';
 import { IContactFields } from '../../../@types/generated/contentful';
 import SocialMedia from '../../components/social-media/socialMedia';
 
@@ -7,10 +8,12 @@ import './contact.module.scss';
 
 interface ContactProps {
   contactSectionProps: IContactFields[];
+  contactRef: LegacyRef<HTMLElement> | undefined;
 }
 
 const Contact = ({
-  contactSectionProps
+  contactSectionProps,
+  contactRef
 }: ContactProps) => {
   const contactData: ContactModule.IContact = new Map(Object.entries(contactSectionProps))
   .values()
@@ -23,7 +26,7 @@ const Contact = ({
 
   return (
     <>
-      <section id="contact" className='contact-wrapper'>
+      <section id="contact" className='contact-wrapper' ref={contactRef}>
         <div className='title-wrapper'>
           <h1>
             {titleSection}
@@ -32,9 +35,11 @@ const Contact = ({
         <div className="contact-links">
           <SocialMedia 
             socialMediaProps={contactLinks}
-            isTitleOfContactActive 
+            isTitleOfContactActive
             isSvgActive
-            isDescriptionSvgActive
+            isDescriptionSvgActive 
+            svgHeight={0} 
+            svgWidth={0}
           />
         </div>
       </section>

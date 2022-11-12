@@ -1,4 +1,5 @@
 import { NextPage } from 'next';
+import { LegacyRef } from 'react';
 import { IStayWithUsFields } from '../../../@types/generated/contentful';
 
 import { StayWithUsTextModule, StayWithUsImageModule } from '../../lib/interfaces/contentful/istayWithUs';
@@ -9,10 +10,12 @@ import './stayWithUs.module.scss';
 
 interface IStayWithUsProps {
   stayWithUsSectionProps: IStayWithUsFields[];
+  stayWithUsRef: LegacyRef<HTMLElement> | undefined;
 }
 
 const StayWithUs: NextPage<IStayWithUsProps> = ({
-  stayWithUsSectionProps 
+  stayWithUsSectionProps,
+  stayWithUsRef 
 }: IStayWithUsProps) => {
   // Text data
   const textContentData: StayWithUsTextModule.IFields = new Map(Object.entries(stayWithUsSectionProps))
@@ -30,7 +33,7 @@ const StayWithUs: NextPage<IStayWithUsProps> = ({
 
   return (
     <>
-      <section id="stay-with-us" className='stay-with-us_wrapper'>
+      <section id="stay-with-us" className='stay-with-us_wrapper' ref={stayWithUsRef}>
         <Description 
           textContentData={textContentData}
         />

@@ -6,13 +6,16 @@ import { concatHttpsAndUrlFromContentful } from '../../utils/utility';
 import Ameneties from './ameneties/ameneties';
 
 import './about.module.scss';
+import { LegacyRef } from 'react';
 
 interface AboutProps {
   aboutSectionProps: IAboutFields[];
+  aboutRef: LegacyRef<HTMLElement> | undefined;
 }
 
 const About = ({
-  aboutSectionProps
+  aboutSectionProps,
+  aboutRef
 }: AboutProps) => {
   const aboutData: AboutModule.IAbout = new Map(Object.entries(aboutSectionProps))
   .values()
@@ -28,7 +31,7 @@ const About = ({
 
   return (
     <>
-      <section id="about" className='about-wrapper'>
+      <section id="about" className='about-wrapper' ref={aboutRef}>
         <div className="about-container">
           <Ameneties aboutData={aboutData} />
           <span className="about-image_wrapper">

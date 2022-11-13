@@ -69,13 +69,11 @@ const Navbar: NextPage<INavbarProps> = ({
     handleWindowResize();
     handleDomWindowResize();
 
+    // for handling overflow on the body
     handleDomNavbarActivity();
 
     // for handling active navlink
-    document.addEventListener("scroll", handleScrollActiveLink);
-    return () => {
-      document.removeEventListener("scroll", handleScrollActiveLink);
-    };
+    handleDomScrollActiveLink();
   }, [lastScrollY]);
 
   const nearestIndex = (
@@ -202,6 +200,15 @@ const Navbar: NextPage<INavbarProps> = ({
       // cleanup function
       return () => {
         window.removeEventListener('scroll', controlNavbarOverflow);
+      };
+    }
+  }
+
+  function handleDomScrollActiveLink(): (() => void) | undefined {
+    if (typeof window !== 'undefined') {
+      document.addEventListener("scroll", handleScrollActiveLink);
+      return () => {
+        document.removeEventListener("scroll", handleScrollActiveLink);
       };
     }
   }

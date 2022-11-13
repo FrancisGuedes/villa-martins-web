@@ -19,6 +19,9 @@
   width: 100%;
   background-color: colors.$mainBackground;
   z-index: 1;
+  .navbar-logo {
+    cursor: pointer;
+  }
   @include animations.headingDown;
   @include animations.animate(headingDown, 0.3s, 0s, cubic-bezier(0.52, 0.01, 0.16, 1), forwards);
   @include mediaQueries.minWidthBigDesktops {

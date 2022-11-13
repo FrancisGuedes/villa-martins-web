@@ -4,7 +4,7 @@
 
 .ameneties-container {
   width: 50%;
-  min-height: 633px;
+  min-height: 605px;
   display: flex;
   flex-direction: column;
   flex-wrap: nowrap;
@@ -12,6 +12,7 @@
   @include mediaQueries.desktop {
     width: 70%;
     justify-content: center;
+    min-height: 700px;
   };
   @include mediaQueries.maxWidthMobile {
     width: 90%,

@@ -24,12 +24,13 @@
   }
   .ameneties_paragraph-wrapper {
     .about-paragraph {
-      margin: 40px 0;
+      margin: 2vw 0;
       font-size: 20px;
       font-weight: fonts.$font-regular;
       @include mediaQueries.desktop {
         margin: 22px 0;
         font-size: 14px;
+        margin: 40px 0;
       };
     }
   }

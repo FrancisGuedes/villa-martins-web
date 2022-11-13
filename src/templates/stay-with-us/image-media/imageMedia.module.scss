@@ -2,12 +2,13 @@
 
 .image-container {
   position: absolute;
-  bottom: 0;
-  height: 67%;
+  bottom: -16px;
+  height: 64%;
   width: 100%;
   text-align: center;
   @include mediaQueries.maxWidthMobile {
     text-align: left;
+    height: 60%;
   }
   .image-content {
     min-height: 80%;

@@ -7,7 +7,6 @@
   position: relative;
   @include mediaQueries.maxWidthMobile {
     height: 100vh;
-    min-height: 650px;
   }
   @include mediaQueries.tablet {
     height: 100vh;

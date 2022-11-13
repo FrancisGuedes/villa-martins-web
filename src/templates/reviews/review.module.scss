@@ -2,7 +2,10 @@
 
 .review-wrapper {
   height: auto;
-  min-height: 555px;
+  min-height: 700px;
+  @include mediaQueries.desktop {
+    min-height: 660px;
+  }
   .title-wrapper {
     border: solid 2px #212121;
     border-radius: 48px/118px;
@@ -10,6 +13,7 @@
     position: relative;
     text-align: center;
     margin-bottom: 40px;
+    margin-top: 70px;
     h1 {
       margin: 10px 0;
     }

@@ -32,6 +32,8 @@ export default class ContentService {
   });
 
   async getEntriesByType<T>(type: string) {
+    console.info("START fetching: ", type);
+    
     return (
       await this.client.getEntries<T>({
         content_type: type,

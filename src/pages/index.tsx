@@ -1,5 +1,5 @@
-import type { NextPage, GetStaticProps, GetStaticPaths, GetServerSideProps } from 'next';
-import { RefObject, useCallback, useRef, useState } from 'react';
+import type { NextPage, GetStaticProps } from 'next';
+import { RefObject, useCallback, useEffect, useRef, useState } from 'react';
 import { IAboutFields, IContactFields, IHomeFields, INavbarFields, IReviewFields, IStayWithUsFields, IFooterFields } from '../../@types/generated/contentful';
 
 import ContentService from '../utils/contentful/content-service';
@@ -37,14 +37,25 @@ const Index: NextPage<IIndexProps> = ({
   footerSectionProps
 }: IIndexProps) => {
   const [isModalOpen, setModalOpen] = useState<boolean>(false);
+  const [navbarDataFetched, setNavbarDataFetched] = useState<INavbarFields[]>(navbarSectionProps);
 
   const handleModal = useCallback(() => setModalOpen((modalOpen: boolean) => !modalOpen), []);
 
-  const homeRef = useRef<number>() as RefObject<number>;
+  const homeRef = useRef() as RefObject<number>;
   const stayWithUsRef = useRef() as RefObject<number>;
   const aboutRef = useRef() as RefObject<number>;
   const reviewRef = useRef() as RefObject<number>;
   const contactRef = useRef() as RefObject<number>;
+
+  const validateNavbarData = () => {
+    console.info("START validateNavbarData", navbarDataFetched);
+    if(typeof navbarSectionProps != 'undefined') {
+      setNavbarDataFetched(navbarSectionProps);
+    } else {
+      throw new Error("ERROR getting navbar data. It's undefined: ", navbarSectionProps);
+    }
+    console.info("END validateNavbarData", navbarDataFetched);
+  }
 
   const navSectionRefs = [
     { headerRef: homeRef },
@@ -53,38 +64,38 @@ const Index: NextPage<IIndexProps> = ({
     { headerRef: reviewRef },
     { headerRef: contactRef },
   ];
+
+  useEffect(() => {
+    if(typeof navbarDataFetched === 'undefined') {
+      validateNavbarData();
+    }
+  }, [navbarDataFetched]);
   
   return (
     <>
-      <Navbar 
-        navbarSectionProps={navbarSectionProps}
-        contactSectionProps={contactSectionProps}
-        handleModal={handleModal}
-        isModalActive={isModalOpen}
-        navSectionRefs={navSectionRefs}
-      />
+      <Navbar
+      navbarSectionProps={navbarSectionProps}
+      contactSectionProps={contactSectionProps}
+      handleModal={handleModal}
+      isModalActive={isModalOpen}
+      navSectionRefs={navSectionRefs} />
       <Layout>
-        <Home 
-          homeSectionProps={homeSectionProps} 
-          homeRef={homeRef}
-        />
-        <StayWithUs 
-          stayWithUsSectionProps={stayWithUsSectionProps} 
-          stayWithUsRef={stayWithUsRef}
-        />
-        <About 
-          aboutSectionProps={aboutSectionProps} 
-          aboutRef={aboutRef}
-        />
-        <Review 
-          reviewSectionProps={reviewSectionProps} 
-          reviewRef={reviewRef}
-        />
+        <Home
+          homeSectionProps={homeSectionProps}
+          homeRef={homeRef} />
+        <StayWithUs
+          stayWithUsSectionProps={stayWithUsSectionProps}
+          stayWithUsRef={stayWithUsRef} />
+        <About
+          aboutSectionProps={aboutSectionProps}
+          aboutRef={aboutRef} />
+        <Review
+          reviewSectionProps={reviewSectionProps}
+          reviewRef={reviewRef} />
       </Layout>
-      <Contact 
+      <Contact
         contactSectionProps={contactSectionProps}
-        contactRef={contactRef}
-      />
+        contactRef={contactRef} />
       <Footer footerSectionProps={footerSectionProps} />
     </>
   )
@@ -93,6 +104,8 @@ const Index: NextPage<IIndexProps> = ({
 export default Index;
 
 export const getStaticProps: GetStaticProps = async () => {
+  console.info("START fetching PROPS");
+
   const navbarSectionProps = (
     await ContentService.instance.getEntriesByType<INavbarFields>(MainContentTypeId.NAVBAR)
   ).map((entry) => entry.fields);
@@ -121,6 +134,7 @@ export const getStaticProps: GetStaticProps = async () => {
     await ContentService.instance.getEntriesByType<IFooterFields>(MainContentTypeId.FOOTER)
   ).map((entry) => entry.fields);
 
+  console.info("END fetching PROPS");
   return {
     props: {
       navbarSectionProps,

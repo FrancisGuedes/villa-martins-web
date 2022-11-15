@@ -145,5 +145,6 @@ export const getStaticProps: GetStaticProps = async () => {
       contactSectionProps,
       footerSectionProps
     },
+    revalidate: 1,
   };
 };

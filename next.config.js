@@ -12,7 +12,10 @@ const nextConfig = {
     });
 
     return config;
-  }
+  },
+  eslint: {
+    ignoreDuringBuilds: true,
+  },
   /* sassOptions: {
     includePaths: [path.join(__dirname, 'styles')],
   }, */

@@ -19,7 +19,8 @@ const CarouselDots = ({
   selectedIndex,
   scrollTo
 }: CarouselDotsProps) => {
-  
+  const relDots: string = functionalityAlias.component.carousel.button.rel
+
   return (
     <>
       { active ? (
@@ -28,7 +29,8 @@ const CarouselDots = ({
             <DotButton
               key={index}
               selected={index === selectedIndex}
-              onClick={() => scrollTo!(index)}
+              onClick={() => scrollTo!(index)} 
+              rel={relDots}
             /> 
           ))}
         </div>

@@ -231,3 +231,13 @@ export const strings = {
     }
   }
 }
+
+export const indexHtmlStrings = {
+  title: "Villa Martins",
+  lang: 'en',
+  charSet: "UTF-8",
+  name: "viewport",
+  content: "width=device-width, initial-scale=1, shrink-to-fit=no",
+  rel: "manifest",
+  href: "/manifest.json",
+} 

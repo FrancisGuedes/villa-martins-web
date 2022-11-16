@@ -22,6 +22,14 @@ class MyDocument extends Document {
           content={MyDocument.labels.content}
         />
         <meta name={MyDocument.labels.themeColor}/>
+        <meta 
+          name={MyDocument.labels.descriptionName} 
+          content={MyDocument.labels.description} 
+        />
+        <link 
+          rel={MyDocument.labels.relAppleTouchIcon} 
+          href={MyDocument.labels.hrefAppleTouchIcon} 
+        />
         <link 
           rel={MyDocument.labels.rel} 
           href={MyDocument.labels.href} 

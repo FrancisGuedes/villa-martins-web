@@ -44,6 +44,7 @@ const MediaLink = ({
               height={svgHeight ? svgHeight : 16 }
               width={svgWidth ? svgWidth : 16}
               className={`${svgClassName} ${className?.svgIcon}`}
+              alt={`Icon for social media: ${svgClassName}`}
             /> 
           : 
             null

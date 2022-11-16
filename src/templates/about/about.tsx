@@ -36,7 +36,7 @@ const About = ({
           <Ameneties aboutData={aboutData} />
           <span className="about-image_wrapper">
             <img
-              alt={imageDescription}
+              alt={`About description for ${imageDescription}`}
               src={imageUrl}
             />
           </span>

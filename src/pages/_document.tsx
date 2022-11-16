@@ -20,7 +20,8 @@ class MyDocument extends Document {
         <meta
           name={MyDocument.labels.name}
           content={MyDocument.labels.content}
-          />
+        />
+        <meta name={MyDocument.labels.themeColor}/>
         <link 
           rel={MyDocument.labels.rel} 
           href={MyDocument.labels.href} 

@@ -240,4 +240,5 @@ export const indexHtmlStrings = {
   content: "width=device-width, initial-scale=1, shrink-to-fit=no",
   rel: "manifest",
   href: "/manifest.json",
+  themeColor: "#ffeee3",
 } 

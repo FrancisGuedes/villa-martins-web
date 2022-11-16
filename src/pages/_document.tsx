@@ -1,4 +1,5 @@
 import Document, { DocumentContext, DocumentInitialProps, Html, Head, Main, NextScript } from 'next/document'
+import { indexHtmlStrings } from '../utils/strings'
 
 class MyDocument extends Document {
   static async getInitialProps(
@@ -9,10 +10,13 @@ class MyDocument extends Document {
     return initialProps
   }
 
+  static labels = indexHtmlStrings;
+
   render() {
     return (
-      <Html>
+      <Html lang={MyDocument.labels.lang}>
         <Head />
+        <title>{MyDocument.labels.title}</title>
         <body>
           <Main />
           <NextScript />

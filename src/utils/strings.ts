@@ -244,5 +244,7 @@ export const indexHtmlStrings = {
   description: "Villa Martins is a stunning villa located in the heart of Tras-os-Montes. It was designed to offer comfort and tranquility, with all modern amenities to ensure you have an unforgettable holiday.",
   descriptionName: "description",
   relAppleTouchIcon: "apple-touch-icon",
-  hrefAppleTouchIcon: '/vm-logo.png'
+  hrefAppleTouchIcon: '/vm-logo.png',
+  nameRobots: "robots",
+  contentRobots: 'noindex'
 } 

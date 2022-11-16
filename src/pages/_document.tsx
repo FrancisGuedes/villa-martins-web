@@ -26,6 +26,10 @@ class MyDocument extends Document {
           name={MyDocument.labels.descriptionName} 
           content={MyDocument.labels.description} 
         />
+        {/* <meta 
+          name={MyDocument.labels.nameRobots} 
+          content={MyDocument.labels.contentRobots} 
+        /> */}
         <link 
           rel={MyDocument.labels.relAppleTouchIcon} 
           href={MyDocument.labels.hrefAppleTouchIcon} 

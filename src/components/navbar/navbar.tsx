@@ -230,8 +230,8 @@ const Navbar: NextPage<INavbarProps> = ({
     <header className={`header-navbar-active ${isNavbarActive ? 'hidden' : ''} ${scrollYPosition > 0 ? 'shadow' : ''}`}>
       <Logo 
         logoImageProps={logoData} 
-        width={150} 
-        height={150} 
+        width={70} 
+        height={55} 
         className='navbar-logo'
       />
       <MobileMenu 

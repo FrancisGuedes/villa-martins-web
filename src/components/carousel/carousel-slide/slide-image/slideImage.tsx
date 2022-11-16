@@ -22,7 +22,7 @@ const SlideImage = ({
         <img
           className={className?.embla_slide_img}
           src={mediaByIndex(index)}
-          alt={slideDescription}
+          alt={`Carousel image ${index}: ${slideDescription}`}
         />
       </div>
     </>

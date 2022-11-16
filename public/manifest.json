@@ -1,0 +1,27 @@
+{
+  "short_name": "Villa Martins",
+  "name": "Villa Martins - Local Accommodation",
+  "icons": [
+    {
+      "src": "favicon.ico",
+      "sizes": "64x64 32x32 24x24 16x16",
+      "type": "image/x-icon"
+    },
+    {
+      "src": "vm-logo.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "vm-logo.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ],
+  "start_url": "/?source=pwa",
+  "background_color": "#ffeee3",
+  "display": "standalone",
+  "scope": "/",
+  "theme_color": "#ffeee3",
+  "description": "Villa Martins is a stunning villa located in the heart of Tras-os-Montes. It was designed to offer comfort and tranquility, with all modern amenities to ensure you have an unforgettable holiday."
+}

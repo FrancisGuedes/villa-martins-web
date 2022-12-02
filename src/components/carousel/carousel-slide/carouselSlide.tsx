@@ -18,13 +18,15 @@ interface CarouselSlideProps {
   className?: LabelCarouselClassName | undefined;
   isSlideImageActive: boolean;
   classNameTextSlide?: LabelCarouselSlideTextClassName | undefined;
+  inView: any;
 }
 
 const CarouselSlide = ({
   slides,
   className,
   isSlideImageActive,
-  classNameTextSlide
+  classNameTextSlide,
+  inView
 }: CarouselSlideProps) => {
   const [slideFile, setSlideFile] = useState<Array<string>>([]);
   const [toggleReviewCommentStatus, setToggleReviewCommentStatus] = useState<boolean[]>([]);
@@ -77,14 +79,14 @@ const CarouselSlide = ({
     if(isSlideImageActive) {
       // Render Image Slides
       const slideDescription: CarouselModule.IFields3 = slide['fields']['media']['fields'].description;
-
       return (
         <div className={className?.embla_slide} key={index}>
           <SlideImage
             className={className}
             mediaByIndex={mediaByIndex} 
             slideDescription={slideDescription.description} 
-            index={index} 
+            index={index}
+            inView={inView.indexOf(index) > -1}
           />
         </div>
       )

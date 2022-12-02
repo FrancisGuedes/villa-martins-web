@@ -88,6 +88,21 @@ const Carousel = ({
   const [selectedIndex, setSelectedIndex] = useState<number>(0);
   const [scrollSnaps, setScrollSnaps] = useState<number[]>([]);
   const [classNameObj, setClassNameObj] = useState<LabelCarouselClassName>();
+  const [slidesInView, setSlidesInView] = useState<any>([]);
+
+  const findSlidesInView = useCallback(() => {
+    if (!emblaApi) return;
+
+    setSlidesInView((slidesInView: any) => {
+      if (slidesInView.length === emblaApi.slideNodes().length) {
+        emblaApi.off("select", findSlidesInView);
+      }
+      const inView = emblaApi
+        .slidesInView(true)
+        .filter((emblaApi) => slidesInView.indexOf(emblaApi) === -1);
+      return slidesInView.concat(inView);
+    });
+  }, [emblaApi, setSlidesInView]);
 
   const labelCarousel: LabelCarouselClassName = {...functionalityAlias.component.carousel.main};
   const labelCarouselDots: LabelDots = {...functionalityAlias.component.carousel.carouselDots};
@@ -125,7 +140,9 @@ const Carousel = ({
     onSelect();
     setScrollSnaps(emblaApi.scrollSnapList());
     emblaApi.on("select", onSelect);
-  }, [emblaApi, onSelect]);
+    findSlidesInView();
+    emblaApi.on("select", findSlidesInView);
+  }, [emblaApi, onSelect, findSlidesInView]);
 
   function validateClassName(): void {
     className === undefined ? setClassNameObj(labelCarousel) : setClassNameObj(className);
@@ -143,6 +160,7 @@ const Carousel = ({
             className={classes}
             isSlideImageActive={isSlideImageActive}
             classNameTextSlide={classesTextSlide}
+            inView={slidesInView}
           />
         </div>
         <PrevButton 

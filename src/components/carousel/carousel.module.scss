@@ -13,7 +13,7 @@
   .embla_viewport {
     overflow: hidden;
     width: 100%;
-    border-radius: 12px;
+    border-radius: 1px;
     @include mediaQueries.minWidthBigDesktops {
       max-height: 39vw;
     }

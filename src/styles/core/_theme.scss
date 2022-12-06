@@ -4,6 +4,12 @@
 @use 'vars';
 @use 'animations';
 
+@font-face { 
+  font-family: 'Aileron';
+  font-style: normal;
+  src: url('./font/Aileron-Thin.otf') format('otf');
+}
+
 * {
   box-sizing: border-box;
 }
@@ -16,7 +22,9 @@ html,
 body {
   padding: 0;
   margin: 0;
-  font-family: 'Montserrat', sans-serif;
+  font-family: 'Aileron', sans-serif;
+  //font-family: 'Montserrat', sans-serif;
+  //font-family: 'Vidaloka', serif;
   font-weight: fonts.$font-medium;
 }
 
@@ -52,14 +60,14 @@ ul {
 
 p {
   margin: 5px 0;
-  font-size: 17px;
+  font-size: 20px;
   line-height: 24px;
 }
 
 h1 {
   font-size: 36px;
-  letter-spacing: 1.5px;
-  font-weight: fonts.$font-medium;
+  letter-spacing: 2px;
+  font-weight: fonts.$font-light;
   @include mediaQueries.desktop {
     font-size: 26px;
   };

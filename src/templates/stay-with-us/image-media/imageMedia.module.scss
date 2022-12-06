@@ -10,6 +10,9 @@
     text-align: left;
     height: 60%;
   }
+  h1 {
+    font-family: 'Vidaloka', serif;
+  }
   .image-content {
     min-height: 80%;
     .stay-with-us_embla {
@@ -36,7 +39,7 @@
               overflow: hidden;		    
               height: 100%;	
               width: 90%;
-              border-radius: 12px;
+              border-radius: 1px;
               @include mediaQueries.desktop {
                 width: 88%;
               }

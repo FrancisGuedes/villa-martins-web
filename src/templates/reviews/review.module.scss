@@ -1,4 +1,5 @@
 @use '../../styles/core/mediaQueries';
+@use '../../styles/core/colors';
 
 .review-wrapper {
   height: auto;
@@ -21,10 +22,13 @@
   .review-carousel_wrapper {
     .review_embla {
       position: relative;
-      width: 100%;
-      height: 100%;
+      width: 92%;
+      height: 245px;
       margin-left: auto;
       margin-right: auto;
+      @include mediaQueries.desktop {
+        width: 100%;
+      }
       .review_embla_viewport {
         overflow: hidden;
         width: 100%;
@@ -32,7 +36,7 @@
         .review_embla__container{
 
           .review_embla__slide {
-            min-width: 29%;
+            min-width: 35%;
             @include mediaQueries.desktop {
               min-width: 80%;
             }
@@ -48,6 +52,20 @@
           }
         }
       }
+    }
+    .embla__button {
+      fill: colors.$black;
+      width: 15px;
+      height: 15px;
+      @include mediaQueries.desktop {
+        display: none;
+      }
+    }
+    .embla__button--prev {
+      left: -45px;
+    }
+    .embla__button--next {
+      right: -45px;
     }
   }
 }

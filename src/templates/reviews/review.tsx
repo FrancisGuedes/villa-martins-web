@@ -47,15 +47,19 @@ const Review = ({
               loop: false,
               skipSnaps: false,
               breakpoints: {
-                '(min-width: 0px)': { 
+                '(max-width: 971px)': { 
                   slidesToScroll: 1,
+                  align: 'start',
+                }, 
+                '(min-width: 970px)': { 
+                  slidesToScroll: 3,
                   align: 'start',
                 }, 
               },
             }}
             slides={cardReview} 
-            isPrevBtnEnabled={false} 
-            isNextBtnEnabled={false} 
+            isPrevBtnEnabled 
+            isNextBtnEnabled 
             isDotsActive={false}
             className={classNames} 
             isSlideImageActive={false}          

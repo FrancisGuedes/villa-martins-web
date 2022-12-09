@@ -16,13 +16,13 @@
   }
   .utilities-list {
     max-height: 200px;
-    height: 163px;
+    height: 147px;
     max-width: 100%;
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
     @include mediaQueries.desktop {
-      height: 134px;
+      height: 111px;
     };
     div {
       flex: 1 0 auto;

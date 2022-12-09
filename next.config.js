@@ -7,8 +7,8 @@ const nextConfig = {
   },
   webpack(config) {
     config.module.rules.push({
-      test: /\.svg$/,
-      use: ["@svgr/webpack"]
+      test: /\.(jpe?g|png|svg|gif|ico|eot|otf|woff|woff2|mp4|pdf|webm|txt)$/,
+      type: 'asset/resource',
     });
 
     return config;

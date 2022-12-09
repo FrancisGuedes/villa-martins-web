@@ -46,12 +46,7 @@ const Review = ({
             emblaOptions={{
               loop: false,
               skipSnaps: false,
-              slidesToScroll: 2,
               breakpoints: {
-                '(min-width: 970px)': {
-                  active: false, 
-                  align: 'start' 
-                },
                 '(min-width: 0px)': { 
                   slidesToScroll: 1,
                   align: 'start',

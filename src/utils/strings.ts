@@ -187,6 +187,11 @@ export const functionalityAlias = {
       cardReviewButtonName: {
         more: 'Show more',
         less: 'Show less'
+      },
+      cardHeaderLink: {
+        href: 'https://www.airbnb.pt/rooms/44072268/reviews?guests=1&adults=1&s=67&unique_share_id=c6a428f2-c2f8-4b37-b147-ee764af9e088&source_impression_id=p3_1666124204_Q5QqWXlKAZEmpjZO',
+        rel: 'link to all comments',
+        target: '_blank'
       }
     },
     appParagraph: {
